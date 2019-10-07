@@ -1,0 +1,173 @@
+---
+title: "Vignette for LHD"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette for LHD}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+This vignette gives a high level overview on how to use the LHD R package to generate maximin distance Latin Hypercube Designs (LHDs) via different heuristic algorithms (and their modifications). In addition to that, there are other functions which are very handy and helpful for developing and constructing maximin distance LHDs.
+
+\
+
+Load the library first.
+```{r}
+devtools::load_all()
+library(LHD)
+```
+
+This overview starts with basic functions and then the advanced ones. The first function to be introduced is the "rLHD", which generates a random LHD with dimension n by k. Suppose we want a random LHD with 6 rows and 3 columns, and denoted it as X. We can run the following code.
+
+```{r}
+set.seed(1)
+X=rLHD(n=6,k=3);X
+```
+
+If we want to know the inter-site distance between row i and row j of X (i $\neq$ j), we could use function "dij". For example, the inter-site distance of the 2nd and the 4th row of X can be done by the following code.
+
+```{r}
+dij(X=X,i=2,j=4) #The default setting is the rectangular distance.
+
+#If Euclidean distance is desired, run the following
+dij(X=X,i=2,j=4,q=2)
+```
+
+The formula of "dij" is 
+
+\begin{equation}
+d(\boldsymbol{x_i}, \boldsymbol{x_j})=  (\sum_{l=1}^{k}|x_{il}-x_{jl}|^q)^{1/q}
+\end{equation}
+
+where $\boldsymbol{x_i}$ and $\boldsymbol{x_j}$ denote two design points from LHD matrix X. Since all the inter-site distances can be calculated, we could further calculate the $\phi_p$ Criterion of X according to the formula from Jin, Chen and Sudjianto (2005).
+
+\begin{equation}
+\phi_{p}= \bigg\{\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}d(\boldsymbol{x_i}, \boldsymbol{x_j})^{-p} \bigg\} ^{1/p}
+\end{equation}
+
+The function "phi_p" provides above $\phi_p$ Criterion calculation. We can run the following code.
+
+```{r}
+phi_p(X=X,p=50)  
+
+#If Euclidean distance is desired, run the following
+phi_p(X=X,p=50,q=2)  
+```
+
+The $\phi_p$ of a random LHD is usually large, and we want space-filling LHDs, e.g. maximin distance LHDs. Morris and Mitchell (1995) proposed a version of the simulated annealing algorithm (SA) for constructing maximin distance LHDs. Our function "SA" implements their algorithm. Besides, function "exchange" makes "SA" workable since it is capable of switching two random elements from a given column of X. The following code shows examples of both "exchange" and "SA".
+
+```{r}
+#Suppose we want to exchange two random elements from the 1st column of X.
+Xnew=exchange(X=X,j=1)
+
+#Look and compare
+X;Xnew
+
+#The SA function
+set.seed(1)
+trySA=SA(n=6,k=3,N=10,T0=10,rate=0.1,Tmin=1,Imax=5,p=50,q=1)
+trySA
+
+#The phi_p of trySA is much smaller than the phi_p of X
+phi_p(X=trySA,p=50) 
+```
+
+Leary, Bhaskar and Keane (2003) modified the SA of Morris and Mitchell (1995). They showed that orthogonal-array-based LHD (OALHD) with SA converges faster and generates better designs. Our function "OASA" implements their algorithm. Besides, function "OA2LHD" makes "OASA" workable since it is capable of transfering an Orthogonal Array (OA) into a LHD with corresponding size, based on the work of Tang (1993). The following code shows examples of both "OA2LHD" and "OASA".
+
+```{r}
+#create an OA(9,2,3,2)
+OA=matrix(c(rep(1:3,each=3),rep(1:3,times=3)),ncol=2,nrow=9,byrow = F);OA
+
+#Transfer the OA above into a 9 by 2 LHD
+tryOA=OA2LHD(OA=OA,9,2,3,2)
+tryOA
+
+#The OASA function
+set.seed(1)
+tryOASA=OASA(OA=OA,9,2,3,2,N=10,T0=10,rate=0.1,Tmin=1,Imax=5,p=50,q=1)
+tryOASA
+
+#The phi_p of tryOASA is smaller than the phi_p of SA with same input parameters
+phi_p(X=tryOASA,p=50) 
+phi_p(X=SA(n=9,k=2,N=10,T0=10,rate=0.1,Tmin=1,Imax=5,p=50,q=1),p=50) 
+```
+
+Joseph and Hung (2008) modified the SA of Morris and Mitchell (1995) in another way that is able to reduce both $\phi_{p}$ and column-wise correlations at the same time. Our function "SA2008" implements their algorithm. See the following code and example.
+
+```{r}
+set.seed(1)
+trySA2008_63=SA2008(n=6,k=3,N=10,T0=10,rate=0.1,Tmin=1,Imax=5,p=50,q=1)
+trySA2008_63
+phi_p(X=trySA2008_63,p=50) 
+
+#Another example with different n and k
+trySA2008_92=SA2008(n=9,k=2,N=10,T0=10,rate=0.1,Tmin=1,Imax=5,p=50,q=1)
+trySA2008_92
+phi_p(X=trySA2008_92,p=50) 
+```
+
+Ba, Myers and Brenneman (2015) extended the idea of Sliced Latin Hypercube Designs (SLHD) from Qian (2012) and had their own modifications of SA from Morris and Mitchell (1995). They called their algorithm "improved two-stage algorithm". Our function "SLHD" implements their algorithm. See the following code and example.
+
+```{r}
+set.seed(1)
+trySLHD_63F=SLHD(n=6,k=3,t=2,N=10,T0=10,rate=0.1,Tmin=1,Imax=5,p=50,q=1)
+trySLHD_63F
+phi_p(X=trySLHD_63F,p=50) 
+
+#If the second stage is desired, run the following
+trySLHD_63T=SLHD(n=6,k=3,t=2,N=10,T0=10,rate=0.1,Tmin=1,Imax=5,p=50,q=1,stage2=TRUE)
+trySLHD_63T
+phi_p(X=trySLHD_63T,p=50) 
+
+#Another example with different n and k
+trySLHD_92T=SLHD(n=9,k=2,t=1,N=10,T0=10,rate=0.1,Tmin=1,Imax=5,p=50,q=1,stage2=TRUE)
+trySLHD_92T
+phi_p(X=trySLHD_92T,p=50) 
+
+```
+
+Chen et al. (2013) followed the structure of Particle Swarm Optimization (PSO) framework and proposed a version of it for constructing maximin distance LHDs, and their algorithm is called LaPSO. Our function "LaPSO" implements their algorithm. See the following code and example.
+
+```{r}
+set.seed(1)
+#This is LaPSO-P
+tryLaPSO_63P=LaPSO(n=6,k=3,m=10,N=10,SameNumP=6/2,SameNumG=0,p0=1/(3-1),p=50,q=1)
+tryLaPSO_63P
+phi_p(X=tryLaPSO_63P,p=50) 
+
+#This is LaPSO-G
+tryLaPSO_63G=LaPSO(n=6,k=3,m=10,N=10,SameNumP=6/4,SameNumG=0,p0=1/(3-1),p=50,q=1)
+tryLaPSO_63G
+phi_p(X=tryLaPSO_63G,p=50) 
+
+#Another example with different n and k
+tryLaPSO_92G=LaPSO(n=9,k=2,m=10,N=10,SameNumP=9/4,SameNumG=0,p0=1/(2-1),p=50,q=1)
+tryLaPSO_92G
+phi_p(X=tryLaPSO_92G,p=50) 
+
+```
+
+Liefvendahl and Stocki (2006) proposed a version of the genetic algorithm (GA) which implemented an elite strategy to focus on the global best directly for constructing maximin distance LHDs. Our function "GA" implements their algorithm. See the following code and example.
+
+```{r}
+set.seed(1)
+#Setting the probability of mutation is 1/(k-1)
+tryGA_63=GA(n=6,k=3,m=10,N=10,pmut=1/(3-1),p=50,q=1)
+tryGA_63
+phi_p(X=tryGA_63,p=50) 
+
+#Another example with different n and k.
+tryGA_92=GA(n=9,k=2,m=10,N=10,pmut=1/(2-1),p=50,q=1)
+tryGA_92
+phi_p(X=tryGA_92,p=50) 
+```

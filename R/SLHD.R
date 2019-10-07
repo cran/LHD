@@ -1,0 +1,351 @@
+#' Sliced Latin Hypercube Design (SLHD)
+#'
+#' \code{SLHD} returns a maximin distance LHD constructed by "improved two-stage algorithm" from Ba et al. (2015).
+#'
+#' @param n A positive integer.
+#' @param k A positive integer.
+#' @param t A positive integer.
+#' @param N A positive integer.
+#' @param T0 A positive number.
+#' @param rate A positive percentage.
+#' @param Tmin A positive number.
+#' @param Imax A positive integer.
+#' @param p A positive integer.
+#' @param q The default is set to be 1, and it could be either 1 or 2.
+#' @param stage2 The default is set to be FALSE, and it could be either FALSE or TRUE.
+#'
+#' @return If all inputs are logical, then the output will be a \code{n} by \code{k} LHD.
+#' @details \itemize{
+#' \item \code{n} stands for the number of rows (or run size).
+#' \item \code{k} stands for the number of columns (or the number of factors).
+#' \item \code{t} stands for the number of slices. \code{n}/\code{t} must be an integer, that is, n is divisible by t. Since S(\strong{X}) needs to be 0 for the algorithm to continue, \code{t} must not exceed \code{k} for \code{n} is 9 or larger, and \code{t} must be smaller than \code{k} for \code{n} is smaller than 9. Otherwise, the funtion will never stop.
+#' \item \code{N} stands for the number of iterations.
+#' \item \code{T0} stands for the user-defined initial temperature.
+#' \item \code{rate} stands for temperature decrease rate, and it should be in (0,1). For example, rate=0.25 means the temperature decreases by 25\% each time.
+#' \item \code{Tmin} stands for the minimium temperature allowed. When current temperature becomes smaller or equal to \code{Tmin}, the stopping criterion for current loop is met.
+#' \item \code{Imax} stands for the maximum perturbations the algorithm will try without improvements before temperature is reduced. For the computation complexity consideration, \code{Imax} is recommended to be smaller or equal to 5.
+#' \item \code{p} is the parameter in the phi_p formula, and \code{p} is prefered to be large.
+#' \item If \code{q} is 1 (the default setting), \code{dij} is the rectangular distance. If \code{q} is 2, \code{dij} is the Euclidean distance.
+#' \item If \code{stage2} is FALSE (the default setting), \code{SLHD} will only implement the first stage of the algorithm. If \code{stage2} is TRUE, \code{SLHD} will implement the whole algorithm.
+#' }
+#'
+#' @note As mentioned from the original paper, the first stage plays a much more important role since it optimizes the slice level. More resources should be given to the first stage if computational budgets are limited. Let m=n/t, where m is the number of rows for each slice, if (m)^k >> n, the second stage becomes optional. That is the reason why we add a \code{stage2} parameter to let users decide if the second stage is needed. If \code{stage2} is FALSE, randomly generated \code{\\Pi_l}'s will be used.
+#'
+#' @references Ba, S., Myers, W.R., and Brenneman, W.A. (2015) Optimal Sliced Latin Hypercube Designs. \emph{Technometrics}, \strong{57}, 479-487.
+#'
+#' @examples
+#' #Try SLHD without stage II: create a 5 by 3 maximin distance LHD, with # of
+#' #slices is 1, # of iterations = 5, initial temperature is set to be 5,
+#' #decrease rate is 20%, minimium temperature is 1, maximum perturbations the
+#' #algorithm will try without improvements is 3, and p=50
+#' trySLHD1=SLHD(n=5,k=3,t=1,N=5,T0=5,rate=0.2,Tmin=1,Imax=3,p=50,q=1)
+#' trySLHD1
+#' phi_p(trySLHD1,p=50)   #calculate the phi_p of "trySLHD1".
+#'
+#' #Try SLHD with stage II
+#' trySLHD2=SLHD(n=5,k=3,t=1,N=5,T0=5,rate=0.2,Tmin=1,Imax=3,p=50,q=1,stage2=TRUE)
+#' trySLHD2
+#' phi_p(trySLHD2,p=50)   #calculate the phi_p of "trySLHD2".
+#' @export
+
+
+SLHD=function(n,k,t,N,T0,rate,Tmin,Imax,p=50,q=1,stage2=FALSE){
+  #n and k are the rs and fa.
+  #t: number of slices. n/t must be an integer, that is, n is divisible by t.
+  #N: maximum number of iterations.
+  #T0: initial temperature
+  #rate: temperature decrease rate. 0<rate<1
+  #Tmin: minumum temperature for each itertaion,TPmin > 0
+  #Imax:# of perturbations the algorithm will try without improvements before Temperature is reduced
+  #stage2: if stage II of the algorithm will be performed. The default is FALSE (not-run).
+  #Note that stage I plays a much more important role in the whole algorithm. More resources should
+  #be allocated for stage I if computational budgets are tight.
+
+  C=1  #Initialize counter index
+
+  m=n/t     #the rs for each slice.
+
+  #step 1 on page 481 starts
+  Y=rep(0,n*k)
+
+  dim(Y)=c(m,k,t)
+
+  #Independtly generate t small LHD for t slices. Each slice is an m by k LHD.
+  for (i in 1:t) {
+    Y[,,i]=rLHD(m,k)
+  }
+
+  #stack the t slices to form an n by k LHD matrix.
+  X=NULL
+
+  for (i in 1:t) {
+    X=rbind(X,Y[,,i])
+  }
+
+  #step 1 on page 481 ends
+
+
+  #The improved two-stage algorithms starts
+
+  #Stage I starts
+
+  SX=0      #the S(X) in stage I
+  DR=NULL   #this is the duplicated rows index, which is used to record row numbers.
+
+  for (i in 1:(n-1)) {
+
+    for (j in (i+1):n) {
+      I=dij(X=X,i=i,j=j,q=q)
+      if (I==0){SX=SX+1;DR=c(DR,i,j)}
+    }
+
+  }
+
+  DR=unique(DR)
+
+  #step ii starts: if S(X)>0
+  while (SX>0){
+    rrow1=sample(DR,1)
+    slice=ceiling(rrow1/m)     #locate the rrow1's slice
+
+    #select another row within the same slice
+    rrow2=sample(seq(from=slice*m,by=-1,length.out=m)[seq(from=slice*m,by=-1,length.out=m)!=rrow1],1)
+
+    rcol=sample(1:k,1)
+
+    Xnew=X
+
+    e1=Xnew[rrow1,rcol]            #exchange 2 elements to form Xnew
+    e2=Xnew[rrow2,rcol]
+
+    Xnew[rrow1,rcol]=e2
+    Xnew[rrow2,rcol]=e1
+
+    SXnew=0      #S(Xnew)
+    DRnew=NULL   #DR for Xnew
+
+    for (i in 1:(n-1)) {
+
+      for (j in (i+1):n) {
+        I=dij(X=Xnew,i=i,j=j,q=q)
+        if (I==0){SXnew=SXnew+1;DRnew=c(DRnew,i,j)}
+      }
+
+    }
+
+    DRnew=unique(DRnew)
+
+    if (SXnew<SX){X=Xnew;SX=SXnew;DR=DRnew}    #this is step iii
+
+  }
+  #step ii and iii ends
+
+  Xbest=X;TP=T0;Flag=1
+
+  while (C<=N) {
+
+    while(Flag==1 & TP>Tmin){
+      Flag=0;I=1
+
+      while (I<=Imax) {
+
+        #at this point, S(X)==0 already.
+
+        #step iv starts
+
+        rt=sample(1:t,1)        #randomly select a slice from the current X
+
+        rcol=sample(1:k,1)      #randomly choose a column
+
+        rrow=sample(seq(from=rt*m,by=-1,length.out=m),2)    #randomly choose 2 rows from slice rt
+
+        Xnew=X
+
+        e1=Xnew[rrow[1],rcol]            #exchange 2 elements to form Xnew
+        e2=Xnew[rrow[2],rcol]
+
+        Xnew[rrow[1],rcol]=e2
+        Xnew[rrow[2],rcol]=e1
+        #step iv ends
+
+        SXnew=0         #S(Xnew)
+
+        #step v starts
+        for (i in 1:(n-1)) {
+
+          for (j in (i+1):n) {
+            I=dij(X=Xnew,i=i,j=j,q=q)
+            if (I==0){SXnew=SXnew+1}
+          }
+
+        }
+
+        while (SXnew>0) {
+
+          rt=sample(1:t,1)        #randomly select a slice from the current X
+
+          rcol=sample(1:k,1)      #randomly choose a column
+
+          rrow=sample(seq(from=rt*m,by=-1,length.out=m),2)    #randomly choose 2 rows from slice rt
+
+          Xnew=X
+
+          e1=Xnew[rrow[1],rcol]            #exchange 2 elements to form Xnew
+          e2=Xnew[rrow[2],rcol]
+
+          Xnew[rrow[1],rcol]=e2
+          Xnew[rrow[2],rcol]=e1
+
+          SXnew=0
+
+          for (i in 1:(n-1)) {
+
+            for (j in (i+1):n) {
+              I=dij(X=Xnew,i=i,j=j,q=q)
+              if (I==0){SXnew=SXnew+1}
+            }
+          }
+
+        }
+        #step v ends
+
+
+        #step vi starts
+
+        a=phi_p(X=Xnew,p=p)
+        b=phi_p(X=X,p=p)
+        if (a<b){X=Xnew;Flag=1}
+        if (a>=b){
+          prob=exp((b-a)/TP)
+          draw=sample(c(0,1),1,prob=c(1-prob,prob))    #draw==1 means replace
+          if(draw==1){X=Xnew;Flag=1}
+        }                         #step 5 ends here
+
+        c=phi_p(X=Xbest,p=p)
+        if (a<c){Xbest=Xnew;I=1}
+        if (a>=c){I=I+1}
+
+        #step vi ends
+
+      }
+
+      TP=TP*(1-rate)
+    }
+
+    C=C+1;TP=T0;Flag=1
+  }
+
+  #Stage I ends
+
+  #step 2 on page 481 starts
+  if(t>1){
+
+    pi_l=rep(0,n)   #the \Pi_l for l=1, ... , m
+
+    dim(pi_l)=c(t,1,m)
+
+    for (i in 1:m) {
+      pi_l[,,i]=seq(from=(i-1)*t+1,to=i*t,1)
+    }
+
+    for (j in 1:k) {
+      for (i in 1:m) {
+        Xbest[,j][Xbest[,j]==i]=sample(pi_l[,,i])*100
+      }
+    }
+    Xbest=Xbest/100
+  }
+
+  #step 2 on page 481 ends
+
+
+  #Stage II starts
+
+  if (stage2==TRUE){
+    C=1
+
+    X=Xbest
+
+    TP=T0;Flag=1
+
+    while (C<=N) {
+
+      while(Flag==1 & TP>Tmin){
+        Flag=0;I=1
+
+        while (I<=Imax) {
+          z=stats::runif(1,0,1)     #step i
+
+          #step ii
+          if (z<=0){
+
+            rt=sample(1:t,1)        #randomly select a slice from X
+
+            rcol=sample(1:k,1)      #randomly choose a column
+
+            rrow=sample(seq(from=rt*m,by=-1,length.out=m),2)    #randomly choose 2 rows from slice rt
+
+            Xnew=X
+
+            e1=Xnew[rrow[1],rcol]            #exchange 2 elements to form Xnew
+            e2=Xnew[rrow[2],rcol]
+
+            Xnew[rrow[1],rcol]=e2
+            Xnew[rrow[2],rcol]=e1
+          }
+
+          #step iii
+          if (z>0){
+
+            rcol=sample(1:k,1)      #randomly choose a column
+
+            if(t>1){
+
+              rl=sample(1:m,1)        #randomly choose a l, where l=1, ..., m
+
+              rrow=sample(pi_l[,,rl],2)    #randomly choose 2 rows from pi_rl
+
+            }
+
+            if(t==1){
+              rrow=sample(1:n,2)       #if there is only one slice,
+            }
+
+            Xnew=X
+
+            e1=Xnew[rrow[1],rcol]            #exchange 2 elements to form Xnew
+            e2=Xnew[rrow[2],rcol]
+
+            Xnew[rrow[1],rcol]=e2
+            Xnew[rrow[2],rcol]=e1
+          }
+
+          #step iv
+
+          a=phi_p(X=Xnew,p=p)
+          b=phi_p(X=X,p=p)
+          if (a<b){X=Xnew;Flag=1}
+          if (a>=b){
+            prob=exp((b-a)/TP)
+            draw=sample(c(0,1),1,prob=c(1-prob,prob))    #draw==1 means replace
+            if(draw==1){X=Xnew;Flag=1}
+          }                         #step 5 ends here
+
+          c=phi_p(X=Xbest,p=p)
+          if (a<c){Xbest=Xnew;I=1}
+          if (a>=c){I=I+1}
+
+        }
+
+        TP=TP*(1-rate)
+      }
+
+      C=C+1;TP=T0;Flag=1
+
+    }
+
+  }
+
+  #Stage II ends
+  Xbest
+}
