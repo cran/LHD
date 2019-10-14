@@ -1,6 +1,7 @@
-13bd07a0db69c24ff95a53897de2ed9f *DESCRIPTION
+94c6d9a7a23ec1ed22dcffbb2866bd92 *DESCRIPTION
 9f16ef13c1ee77c96da8f2961be5a354 *LICENSE
 9f8b6c4ec744364d19d68c0f850a985b *NAMESPACE
+567c65cc7ae7ab3e607810c3e1dab918 *NEWS.md
 a93063c3c69cbbd97ee06f979e20be25 *R/GA.R
 9059033a7c7eba88544b6e2bc4c6968a *R/LaPSO.R
 1c40865cfe80f0c3f31770100c8cb34c *R/OA2LHD.R
@@ -12,7 +13,7 @@ dec66e3584f2b2b7950696980f66baa2 *R/dij.R
 19bd0b18aed2d296b3ab9019c3370918 *R/exchange.R
 e0193328e3173194f178581a654e9644 *R/phi_p.R
 2668232281a3e8abb47dc2507d1d5406 *R/rLHD.R
-f530fd6406f670ad224269dfa2a8d2eb *build/vignette.rds
+d61ec2797c5c0f5e4dc6479aa345fcdc *build/vignette.rds
 c3ffa091882bedda8fdc3e569ccda1d4 *inst/doc/Vignette_for_LHD.R
 0a01445ea2cef0834464b24427670e16 *inst/doc/Vignette_for_LHD.Rmd
 a3fcec80664751f29fb5e458f25c4418 *inst/doc/Vignette_for_LHD.html
