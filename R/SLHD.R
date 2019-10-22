@@ -49,7 +49,7 @@
 #' @export
 
 
-SLHD=function(n,k,t,N,T0,rate,Tmin,Imax,p=50,q=1,stage2=FALSE){
+SLHD=function(n,k,t,N,T0,rate,Tmin,Imax,p=15,q=1,stage2=FALSE){
   #n and k are the rs and fa.
   #t: number of slices. n/t must be an integer, that is, n is divisible by t.
   #N: maximum number of iterations.
@@ -212,8 +212,8 @@ SLHD=function(n,k,t,N,T0,rate,Tmin,Imax,p=50,q=1,stage2=FALSE){
 
         #step vi starts
 
-        a=phi_p(X=Xnew,p=p)
-        b=phi_p(X=X,p=p)
+        a=phi_p(X=Xnew,p=p,q=q)
+        b=phi_p(X=X,p=p,q=q)
         if (a<b){X=Xnew;Flag=1}
         if (a>=b){
           prob=exp((b-a)/TP)
@@ -221,7 +221,7 @@ SLHD=function(n,k,t,N,T0,rate,Tmin,Imax,p=50,q=1,stage2=FALSE){
           if(draw==1){X=Xnew;Flag=1}
         }                         #step 5 ends here
 
-        c=phi_p(X=Xbest,p=p)
+        c=phi_p(X=Xbest,p=p,q=q)
         if (a<c){Xbest=Xnew;I=1}
         if (a>=c){I=I+1}
 
@@ -322,8 +322,8 @@ SLHD=function(n,k,t,N,T0,rate,Tmin,Imax,p=50,q=1,stage2=FALSE){
 
           #step iv
 
-          a=phi_p(X=Xnew,p=p)
-          b=phi_p(X=X,p=p)
+          a=phi_p(X=Xnew,p=p,q=q)
+          b=phi_p(X=X,p=p,q=q)
           if (a<b){X=Xnew;Flag=1}
           if (a>=b){
             prob=exp((b-a)/TP)
@@ -331,7 +331,7 @@ SLHD=function(n,k,t,N,T0,rate,Tmin,Imax,p=50,q=1,stage2=FALSE){
             if(draw==1){X=Xnew;Flag=1}
           }                         #step 5 ends here
 
-          c=phi_p(X=Xbest,p=p)
+          c=phi_p(X=Xbest,p=p,q=q)
           if (a<c){Xbest=Xnew;I=1}
           if (a>=c){I=I+1}
 

@@ -36,11 +36,11 @@
 #' phi_p(try,p=50)   #calculate the phi_p of "try".
 #'
 #' #Another example with different input
-#' try2=SA(n=9,k=2,N=50,T0=10,rate=0.1,Tmin=1,Imax=5,p=50,q=1)
+#' try2=SA(n=9,k=2,N=50,T0=10,rate=0.1,Tmin=1,Imax=5,p=15,q=1)
 #' try2
 #' @export
 
-SA=function(n,k,N,T0,rate,Tmin,Imax,p=50,q=1){
+SA=function(n,k,N,T0,rate,Tmin,Imax,p=15,q=1){
   #n and k are the rs and fa.
   #N: maximum number of iterations.
   #T0: initial temperature
@@ -63,8 +63,8 @@ SA=function(n,k,N,T0,rate,Tmin,Imax,p=50,q=1){
         rcol=sample(1:k,1)   #step 3:Randomly choose a column
         Xnew=exchange(X=X,j=rcol)  #step 4:Exchange two randomly elements within the column "rcol"
 
-        a=phi_p(X=Xnew,p=p)       #step 5 begins here
-        b=phi_p(X=X,p=p)
+        a=phi_p(X=Xnew,p=p,q=q)       #step 5 begins here
+        b=phi_p(X=X,p=p,q=q)
         if (a<b){X=Xnew;Flag=1}
         if (a>=b){
           prob=exp((b-a)/TP)
@@ -72,7 +72,7 @@ SA=function(n,k,N,T0,rate,Tmin,Imax,p=50,q=1){
           if(draw==1){X=Xnew;Flag=1}
         }                         #step 5 ends here
 
-        c=phi_p(X=Xbest,p=p)
+        c=phi_p(X=Xbest,p=p,q=q)
         if (a<c){Xbest=Xnew;I=1}
         if (a>=c){I=I+1}
 

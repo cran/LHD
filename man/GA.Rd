@@ -4,7 +4,7 @@
 \alias{GA}
 \title{Genetic Algorithm for LHD}
 \usage{
-GA(n, k, m, N, pmut, p = 50, q = 1)
+GA(n, k, m, N, pmut, p = 15, q = 1)
 }
 \arguments{
 \item{n}{A positive integer.}
@@ -41,14 +41,14 @@ If all inputs are logical, then the output will be a \code{n} by \code{k} LHD.
 \examples{
 #create a 8 by 3 maximin distance LHD, with # of population and iterations = 10,
 #the probability of mutation is 1/(k-1)
-tryGA1=GA(n=8,k=3,m=10,N=10,pmut=1/(3-1),p=50,q=1)
+tryGA1=GA(n=8,k=3,m=10,N=10,pmut=1/(3-1),p=15,q=1)
 tryGA1
-phi_p(tryGA1,p=50)   #calculate the phi_p of "tryGA1".
+phi_p(tryGA1,p=15,q=1)   #calculate the phi_p of "tryGA1".
 
 #Another example with different n and k.
-tryGA2=GA(n=12,k=2,m=10,N=10,pmut=1/(3-1),p=50,q=1)
+tryGA2=GA(n=12,k=2,m=10,N=10,pmut=1/(3-1),p=15,q=1)
 tryGA2
-phi_p(tryGA2,p=50)   #calculate the phi_p of "tryGA2".
+phi_p(tryGA2,p=15,q=1)   #calculate the phi_p of "tryGA2".
 }
 \references{
 Liefvendahl, M., and Stocki, R. (2006) A study on algorithms for optimization of Latin hypercubes. \emph{Journal of Statistical Planning and Inference}, \strong{136}, 3231-3247.

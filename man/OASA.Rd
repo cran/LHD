@@ -4,7 +4,7 @@
 \alias{OASA}
 \title{Orthogonal-Array-Based Simulated Annealing}
 \usage{
-OASA(OA, n, m, s, r, N, T0, rate, Tmin, Imax, p = 50, q = 1)
+OASA(OA, n, m, s, r, N, T0, rate, Tmin, Imax, p = 15, q = 1)
 }
 \arguments{
 \item{OA}{A Matrix.}

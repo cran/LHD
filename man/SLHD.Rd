@@ -4,7 +4,7 @@
 \alias{SLHD}
 \title{Sliced Latin Hypercube Design (SLHD)}
 \usage{
-SLHD(n, k, t, N, T0, rate, Tmin, Imax, p = 50, q = 1, stage2 = FALSE)
+SLHD(n, k, t, N, T0, rate, Tmin, Imax, p = 15, q = 1, stage2 = FALSE)
 }
 \arguments{
 \item{n}{A positive integer.}

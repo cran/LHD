@@ -44,7 +44,7 @@
 #' tryOASA
 #' @export
 
-OASA=function(OA,n,m,s,r,N,T0,rate,Tmin,Imax,p=50,q=1){
+OASA=function(OA,n,m,s,r,N,T0,rate,Tmin,Imax,p=15,q=1){
   #OA: OA must be an orthogonal array
   #n: number of rows of OA
   #m: number of columns of OA
@@ -106,8 +106,8 @@ OASA=function(OA,n,m,s,r,N,T0,rate,Tmin,Imax,p=50,q=1){
         #step 4 ends
 
 
-        a=phi_p(X=Xnew,p=p)       #step 5 begins here
-        b=phi_p(X=X,p=p)
+        a=phi_p(X=Xnew,p=p,q=q)       #step 5 begins here
+        b=phi_p(X=X,p=p,q=q)
         if (a<b){X=Xnew;Flag=1}
         if (a>=b){
           prob=exp((b-a)/TP)
@@ -115,7 +115,7 @@ OASA=function(OA,n,m,s,r,N,T0,rate,Tmin,Imax,p=50,q=1){
           if(draw==1){X=Xnew;Flag=1}
         }                         #step 5 ends here
 
-        c=phi_p(X=Xbest,p=p)
+        c=phi_p(X=Xbest,p=p,q=q)
         if (a<c){Xbest=Xnew;I=1}
         if (a>=c){I=I+1}
 

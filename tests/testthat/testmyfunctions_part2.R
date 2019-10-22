@@ -1,15 +1,13 @@
 context("Other Handy functions")
 
 test_that("Calculate the Inter-site Distance", {
-  set.seed(1)
-  X=rLHD(6,3)
+  X=matrix(c(1,3,5,4,2,2,3,6,6,6,4,4,2,1,3,5,5,1),ncol=3,nrow=6,byrow=TRUE)
   expect_equal(dij(X,1,2),7)
   expect_equal(dij(X,2,4),6)
 })
 
 test_that("Calculate the phi_p Criterion", {
-  set.seed(1)
-  X=rLHD(6,3)
+  X=matrix(c(1,3,5,4,2,2,3,6,6,6,4,4,2,1,3,5,5,1),ncol=3,nrow=6,byrow=TRUE)
   expect_equal(round(phi_p(X,p=50),7),0.2500002)
   expect_equal(round(phi_p(X,p=50,q=2),7),0.4082486)
 })

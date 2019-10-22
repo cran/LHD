@@ -26,17 +26,17 @@
 #' @examples
 #' #create a 8 by 3 maximin distance LHD, with # of population and iterations = 10,
 #' #the probability of mutation is 1/(k-1)
-#' tryGA1=GA(n=8,k=3,m=10,N=10,pmut=1/(3-1),p=50,q=1)
+#' tryGA1=GA(n=8,k=3,m=10,N=10,pmut=1/(3-1),p=15,q=1)
 #' tryGA1
-#' phi_p(tryGA1,p=50)   #calculate the phi_p of "tryGA1".
+#' phi_p(tryGA1,p=15,q=1)   #calculate the phi_p of "tryGA1".
 #'
 #' #Another example with different n and k.
-#' tryGA2=GA(n=12,k=2,m=10,N=10,pmut=1/(3-1),p=50,q=1)
+#' tryGA2=GA(n=12,k=2,m=10,N=10,pmut=1/(3-1),p=15,q=1)
 #' tryGA2
-#' phi_p(tryGA2,p=50)   #calculate the phi_p of "tryGA2".
+#' phi_p(tryGA2,p=15,q=1)   #calculate the phi_p of "tryGA2".
 #' @export
 
-GA=function(n,k,m,N,pmut,p=50,q=1){
+GA=function(n,k,m,N,pmut,p=15,q=1){
   #n and k are the rs and fa.
   #m: the number of population and it must be an even number.
   #N: maximum number of iterations.
@@ -58,7 +58,7 @@ GA=function(n,k,m,N,pmut,p=50,q=1){
   phip=rep(0,m)
 
   for (i in 1:m) {
-    phip[i]=phi_p(X[,,i],p=50)
+    phip[i]=phi_p(X[,,i],p=p,q=q)
   }
   #step 3 ends
 
@@ -126,7 +126,7 @@ GA=function(n,k,m,N,pmut,p=50,q=1){
 
     #step 21: update phi_p for all the L_i
     for (i in 1:m) {
-      phip[i]=phi_p(X[,,i],p=50)
+      phip[i]=phi_p(X[,,i],p=p,q=q)
     }
 
     C=C+1

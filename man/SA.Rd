@@ -4,7 +4,7 @@
 \alias{SA}
 \title{Simulated Annealing for LHD}
 \usage{
-SA(n, k, N, T0, rate, Tmin, Imax, p = 50, q = 1)
+SA(n, k, N, T0, rate, Tmin, Imax, p = 15, q = 1)
 }
 \arguments{
 \item{n}{A positive integer.}
@@ -53,7 +53,7 @@ try
 phi_p(try,p=50)   #calculate the phi_p of "try".
 
 #Another example with different input
-try2=SA(n=9,k=2,N=50,T0=10,rate=0.1,Tmin=1,Imax=5,p=50,q=1)
+try2=SA(n=9,k=2,N=50,T0=10,rate=0.1,Tmin=1,Imax=5,p=15,q=1)
 try2
 }
 \references{

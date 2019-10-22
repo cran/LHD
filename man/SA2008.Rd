@@ -4,7 +4,7 @@
 \alias{SA2008}
 \title{Simulated Annealing for LHD with Multi-objective Optimization Approach}
 \usage{
-SA2008(n, k, N, T0, rate, Tmin, Imax, p = 50, q = 1)
+SA2008(n, k, N, T0, rate, Tmin, Imax, p = 15, q = 1)
 }
 \arguments{
 \item{n}{A positive integer.}

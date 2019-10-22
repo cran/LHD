@@ -36,18 +36,18 @@
 #'
 #' @examples
 #' #create a 8 by 3 maximin distance LHD, with # of particles and iterations = 10, when SameNumG is 0
-#' tryLaPSO1=LaPSO(n=8,k=3,m=10,N=10,SameNumP=8/2,SameNumG=0,p0=1/(3-1),p=50,q=1)
+#' tryLaPSO1=LaPSO(n=8,k=3,m=10,N=10,SameNumP=8/2,SameNumG=0,p0=1/(3-1),p=15,q=1)
 #' tryLaPSO1
-#' phi_p(tryLaPSO1,p=50)   #calculate the phi_p of "tryLaPSO1".
+#' phi_p(tryLaPSO1,p=15,q=1)   #calculate the phi_p of "tryLaPSO1".
 #'
 #' #create a 8 by 3 maximin distance LHD, with # of particles and iterations = 10, when SameNumP is 0
-#' tryLaPSO2=LaPSO(n=8,k=3,m=10,N=10,SameNumP=0,SameNumG=8/4,p0=1/(3-1),p=50,q=1)
+#' tryLaPSO2=LaPSO(n=8,k=3,m=10,N=10,SameNumP=0,SameNumG=8/4,p0=1/(3-1),p=15,q=1)
 #' tryLaPSO2
-#' phi_p(tryLaPSO2,p=50)   #calculate the phi_p of "tryLaPSO2".
+#' phi_p(tryLaPSO2,p=14,q=1)   #calculate the phi_p of "tryLaPSO2".
 #' @export
 
 
-LaPSO=function(n,k,m,N,SameNumP,SameNumG,p0,p=50,q=1){
+LaPSO=function(n,k,m,N,SameNumP,SameNumG,p0,p=15,q=1){
   #n and k are the rs and fa.
   #m: the number of particles
   #N: maximum number of iterations.
@@ -77,7 +77,7 @@ LaPSO=function(n,k,m,N,SameNumP,SameNumG,p0,p=50,q=1){
   gbest=X[,,1]
 
   for (i in 2:m) {
-    if (phi_p(X[,,i],p=p)<phi_p(gbest,p=p)){gbest=X[,,i]}
+    if (phi_p(X[,,i],p=p,q=q)<phi_p(gbest,p=p,q=q)){gbest=X[,,i]}
   }
 
   #step 4 ends
@@ -153,8 +153,8 @@ LaPSO=function(n,k,m,N,SameNumP,SameNumG,p0,p=50,q=1){
 
     for (i in 1:m) {     #step 15
 
-      if (phi_p(Xnew[,,i],p=p)<phi_p(pbest[,,i],p=p)){pbest[,,i]=Xnew[,,i]}   #step 16-19
-      if (phi_p(Xnew[,,i],p=p)<phi_p(gbest,p=p)){gbest=Xnew[,,i]}             #step 20-22
+      if (phi_p(Xnew[,,i],p=p,q=q)<phi_p(pbest[,,i],p=p,q=q)){pbest[,,i]=Xnew[,,i]}   #step 16-19
+      if (phi_p(Xnew[,,i],p=p,q=q)<phi_p(gbest,p=p,q=q)){gbest=Xnew[,,i]}             #step 20-22
     }      #step 23: end for
 
     C=C+1
