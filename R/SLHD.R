@@ -303,21 +303,33 @@ SLHD=function(n,k,t,N,T0,rate,Tmin,Imax,p=15,q=1,stage2=FALSE){
 
               rl=sample(1:m,1)        #randomly choose a l, where l=1, ..., m
 
-              rrow=sample(pi_l[,,rl],2)    #randomly choose 2 rows from pi_rl
+              re=sample(pi_l[,,rl],2)    #randomly choose 2 elements from pi_rl that will be exchanged
+
+              Xnew=X
+
+              rrow=c(which(Xnew[,rcol]==re[1]),which(Xnew[,rcol]==re[2]))
+
+              e1=Xnew[rrow[1],rcol]            #exchange 2 elements to form Xnew
+              e2=Xnew[rrow[2],rcol]
+
+              Xnew[rrow[1],rcol]=e2
+              Xnew[rrow[2],rcol]=e1
 
             }
 
             if(t==1){
-              rrow=sample(1:n,2)       #if there is only one slice,
+              rrow=sample(1:n,2)       #if there is only one slice
+
+              Xnew=X
+
+              e1=Xnew[rrow[1],rcol]            #exchange 2 elements to form Xnew
+              e2=Xnew[rrow[2],rcol]
+
+              Xnew[rrow[1],rcol]=e2
+              Xnew[rrow[2],rcol]=e1
             }
 
-            Xnew=X
 
-            e1=Xnew[rrow[1],rcol]            #exchange 2 elements to form Xnew
-            e2=Xnew[rrow[2],rcol]
-
-            Xnew[rrow[1],rcol]=e2
-            Xnew[rrow[2],rcol]=e1
           }
 
           #step iv

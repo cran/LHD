@@ -1,3 +1,6 @@
+\#LHD 0.1.3
+Updated SLHD function: The exchanging logic in Stage II has been updated.
+
 \#LHD 0.1.2
 
 The following functions have been updated:
