@@ -15,7 +15,7 @@ rLHD(n, k)
 If all inputs are positive integer, then the output will be a \code{n} by \code{k} design matrix.
 }
 \description{
-\code{rLHD} returns a Latin Hypercube Design matrix with user-defined dimention
+\code{rLHD} returns an Latin hypercube design matrix with user-defined dimention
 }
 \details{
 \itemize{
@@ -29,5 +29,4 @@ toy=rLHD(n=5,k=3);toy
 
 #another example with 9 rows and 2 columns
 rLHD(9,2)
-
 }

@@ -19,7 +19,7 @@ dij(X, i, j, q = 1)
 If all inputs are logical, then the output will be a positive number indicating the distance.
 }
 \description{
-\code{dij} returns the inter-site distance of two design points of a LHD
+\code{dij} returns the inter-site distance of two design points of an LHD
 }
 \details{
 \itemize{

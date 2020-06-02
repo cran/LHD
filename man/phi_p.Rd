@@ -4,12 +4,12 @@
 \alias{phi_p}
 \title{Calculate the phi_p Criterion}
 \usage{
-phi_p(X, p, q = 1)
+phi_p(X, p = 15, q = 1)
 }
 \arguments{
 \item{X}{A Matrix.}
 
-\item{p}{A positive integer.}
+\item{p}{A positive integer. The default is set to be 15.}
 
 \item{q}{The default is set to be 1, and it could be either 1 or 2.}
 }
@@ -17,7 +17,7 @@ phi_p(X, p, q = 1)
 If all inputs are logical, then the output will be a positive number indicating phi_p.
 }
 \description{
-\code{phi_p} returns the phi_p criterion of a LHD
+\code{phi_p} returns the phi_p criterion of an LHD
 }
 \details{
 \itemize{
@@ -33,10 +33,10 @@ If all inputs are logical, then the output will be a positive number indicating 
 #create a toy LHD with 5 rows and 3 columns
 toy=rLHD(n=5,k=3);toy
 
-#Calculate the phi_p criterion of toy (with default q and p=50)
-phi_p(X=toy,p=50)
+#Calculate the phi_p criterion of toy with default setting
+phi_p(X=toy)
 
-#Calculate the phi_p criterion of toy (with q=2 and and p=50)
+#Calculate the phi_p criterion of toy with p=50 and q=2
 phi_p(X=toy,p=50,q=2)
 }
 \references{

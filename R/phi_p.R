@@ -1,9 +1,9 @@
 #' Calculate the phi_p Criterion
 #'
-#' \code{phi_p} returns the phi_p criterion of a LHD
+#' \code{phi_p} returns the phi_p criterion of an LHD
 #'
 #' @param X A Matrix.
-#' @param p A positive integer.
+#' @param p A positive integer. The default is set to be 15.
 #' @param q The default is set to be 1, and it could be either 1 or 2.
 #'
 #' @return If all inputs are logical, then the output will be a positive number indicating phi_p.
@@ -21,14 +21,14 @@
 #' #create a toy LHD with 5 rows and 3 columns
 #' toy=rLHD(n=5,k=3);toy
 #'
-#' #Calculate the phi_p criterion of toy (with default q and p=50)
-#' phi_p(X=toy,p=50)
+#' #Calculate the phi_p criterion of toy with default setting
+#' phi_p(X=toy)
 #'
-#' #Calculate the phi_p criterion of toy (with q=2 and and p=50)
+#' #Calculate the phi_p criterion of toy with p=50 and q=2
 #' phi_p(X=toy,p=50,q=2)
 #' @export
 
-phi_p=function(X,p,q=1){
+phi_p=function(X,p=15,q=1){
   #X: must be a matrix
   #the default for q is 1:rectangular distance
   #if type q=2: Euclidean distance

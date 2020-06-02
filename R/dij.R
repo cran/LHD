@@ -1,6 +1,6 @@
 #' Calculate the Inter-site Distance
 #'
-#' \code{dij} returns the inter-site distance of two design points of a LHD
+#' \code{dij} returns the inter-site distance of two design points of an LHD
 #'
 #' @param X A Matrix.
 #' @param i A positive integer.
