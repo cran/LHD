@@ -1,16 +1,11 @@
 #' Calculate the Average Absolute Correlation
 #'
-#' \code{AvgAbsCor} returns the average absolute correlation of an LHD
+#' \code{AvgAbsCor} returns the average absolute correlation of a matrix
 #'
-#' @param X A Matrix.
+#' @param X A matrix object. In general, \code{X} stands for the design matrix.
 #'
-#' @return If all inputs are logical, then the output will be a positive number indicating average absolute correlation.
-#' @details \itemize{
-#' \item \code{X} stands for the design matrix.
-#' \item The average absolute correlation formula is given by the Note Section below.
-#' }
-#'
-#' @note \code{average absolute correlation = \\frac{2 \\sum_{i=1}^{k-1} \\sum_{j=i+1}^{k}|q_{ij}|}{k(k-1)}}
+#' @return If all inputs are logical, then the output will be a positive number indicating the average absolute correlation of input matrix.
+#' \code{average absolute correlation = \\frac{2 \\sum_{i=1}^{k-1} \\sum_{j=i+1}^{k}|q_{ij}|}{k(k-1)}}
 #'
 #' @references Georgiou, S. D. (2009) Orthogonal Latin hypercube designs from generalized orthogonal designs. \emph{Journal of Statistical Planning and Inference}, \strong{139}, 1530-1540.
 #'

@@ -2,14 +2,9 @@
 #'
 #' \code{OA2LHD} transfers an OA into an LHD with corresponding size
 #'
-#' @param OA A Matrix.
+#' @param OA An orthogonal array matrix.
 #'
-#' @return If the input is logical, then the output will be an LHD whose sizes are the same as input OA.
-#' @details \itemize{
-#' \item \code{OA} stands for the input orthogonal array matrix.
-#' }
-#'
-#' @note The assumption is that the elements of OAs must be positive.
+#' @return If the input is logical, then the output will be an LHD whose sizes are the same as input OA. The assumption is that the elements of OAs must be positive.
 #'
 #' @references Tang, B. (1993) Orthogonal-array-based latin hypercubes. \emph{Journal of the Americal Statistical Association}, \strong{88}, 1392-1397.
 #'

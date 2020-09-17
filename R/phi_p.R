@@ -2,18 +2,11 @@
 #'
 #' \code{phi_p} returns the phi_p criterion of an LHD
 #'
-#' @param X A Matrix.
-#' @param p A positive integer. The default is set to be 15.
-#' @param q The default is set to be 1, and it could be either 1 or 2.
+#' @param X A matrix object. In general, \code{X} stands for the design matrix.
+#' @param p A positive integer, which is the parameter in the phi_p formula, and \code{p} is prefered to be large. The default is set to be 15.
+#' @param q The default is set to be 1, and it could be either 1 or 2. If \code{q} is 1, \code{dij} is the Manhattan (rectangular) distance. If \code{q} is 2, \code{dij} is the Euclidean distance.
 #'
-#' @return If all inputs are logical, then the output will be a positive number indicating phi_p.
-#' @details \itemize{
-#' \item \code{X} stands for the design matrix.
-#' \item \code{p} is the parameter in the phi_p formula (see Note Section below), and \code{p} is prefered to be large.
-#' \item If \code{q} is 1 (the default setting), \code{dij} is the rectangular distance. If \code{q} is 2, \code{dij} is the Euclidean distance.
-#' }
-#'
-#' @note \code{\\phi_p = (\\sum_{i=1}^{n-1}\\sum_{j=i+1}^{n}dij^{-p})^{1/p}}
+#' @return If all inputs are logical, then the output will be a positive number indicating phi_p. \code{\\phi_p = (\\sum_{i=1}^{n-1}\\sum_{j=i+1}^{n}dij^{-p})^{1/p}}, where \code{dij =  \\left\\{ \\sum_{k=1}^{m} \\vert x_{ik}-x_{jk}\\vert ^q \\right\\}^{1/q}}
 #'
 #' @references Jin, R., Chen, W., and Sudjianto, A. (2005) An efficient algorithm for constructing optimal design of computer experiments. \emph{Journal of Statistical Planning and Inference}, \strong{134}, 268-287.
 #'

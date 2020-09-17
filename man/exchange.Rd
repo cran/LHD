@@ -7,21 +7,15 @@
 exchange(X, j)
 }
 \arguments{
-\item{X}{A Matrix.}
+\item{X}{A matrix object. In general, \code{X} stands for the design matrix.}
 
-\item{j}{A positive integer.}
+\item{j}{A positive integer, which stands for the j^{th} column of \code{X}, and it should be in [1,ncol(X)].}
 }
 \value{
 If all inputs are logical, then the output will be a new design matrix after the exchange.
 }
 \description{
-\code{exchange} returns a new design matrix after two randomly selected elements are switched from a user-defined column.
-}
-\details{
-\itemize{
-\item \code{X} stands for the design matrix.
-\item \code{j} is the j^th column of the design matrix, and it should be in [1,ncol(X)].
-}
+\code{exchange} returns a new design matrix after two randomly selected elements are switched from a user-defined column
 }
 \examples{
 #create a toy LHD with 5 rows and 3 columns

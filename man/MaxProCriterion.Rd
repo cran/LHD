@@ -7,22 +7,14 @@
 MaxProCriterion(X)
 }
 \arguments{
-\item{X}{A Matrix.}
+\item{X}{A matrix object. In general, \code{X} stands for the design matrix.}
 }
 \value{
 If all inputs are logical, then the output will be a positive number indicating maximum projection criterion.
+\code{maximum projection criterion = \\Bigg\{ \\frac{1}{{n \\choose 2}} \\sum_{i=1}^{n-1} \\sum_{j=i+1}^{n} \\frac{1}{\\Pi_{l=1}^{k}(x_{il}-x_{jl})^2}  \\Bigg\}^{1/k}}
 }
 \description{
 \code{MaxProCriterion} returns the maximum projection criterion of an LHD
-}
-\details{
-\itemize{
-\item \code{X} stands for the design matrix.
-\item The maximum projection criterion formula is given by the Note Section below.
-}
-}
-\note{
-\code{maximum projection criterion = \\Bigg\{ \\frac{1}{{n \\choose 2}} \\sum_{i=1}^{n-1} \\sum_{j=i+1}^{n} \\frac{1}{\\Pi_{l=1}^{k}(x_{il}-x_{jl})^2}  \\Bigg\}^{1/k}}
 }
 \examples{
 #create a toy LHD with 5 rows and 3 columns

@@ -136,3 +136,35 @@ set.seed(1)
 tryGA=GA(n=6,k=3,OC="AvgAbsCor")
 AvgAbsCor(tryGA)      #The average absolute correlation is about 0.07
 
+## -----------------------------------------------------------------------------
+#n by n design when 2n+1 is prime
+try=FastMmLHD(8,8)
+try
+phi_p(try)   #calculate the phi_p of "try".
+
+#n by n design when n+1 is prime
+try2=FastMmLHD(12,12)
+try2
+phi_p(try2)   #calculate the phi_p of "try2".
+
+#n by n-1 design when n is prime
+try3=FastMmLHD(7,6)
+try3
+phi_p(try3)   #calculate the phi_p of "try3".
+
+#General cases
+try4=FastMmLHD(24,8)
+try4
+phi_p(try4)   #calculate the phi_p of "try4".
+
+## -----------------------------------------------------------------------------
+#create an orthogonal LHD with m=3. So n=2^m+1=9 and k=2*m-2=4
+tryOLHD=OLHD1998(m=3)
+tryOLHD
+MaxAbsCor(tryOLHD)  #zero columnwise correlations
+
+#create an orthogonal LHD with m=4. So n=2^m+1=17 and k=2*m-2=6
+tryOLHD2=OLHD1998(m=4)
+tryOLHD2
+MaxAbsCor(tryOLHD2)  #zero columnwise correlations
+

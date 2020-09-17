@@ -78,7 +78,7 @@ AvgAbsCor(X=X)  #The average absolute correlation of X
 MaxAbsCor(X=X)  #The maximum absolute correlation of X
 ```
 
-Another optimality criterion to be introduced is the maximum projection criterion (Joseph, Gul and Ba (2015)), which focuses on the peojection property of the design matrix, and its formula is given by the following
+Another optimality criterion to be introduced is the maximum projection criterion (Joseph, Gul and Ba (2015)), which focuses on the projection property of the design matrix, and its formula is given by the following
 
 \begin{equation}
 \psi = \Bigg\{ \frac{1}{{n \choose 2}} \sum_{i=1}^{n-1} \sum_{j=i+1}^{n} \frac{1}{\Pi_{l=1}^{k}(x_{il}-x_{jl})^2}  \Bigg\}^{1/k}.
@@ -117,7 +117,7 @@ AvgAbsCor(trySA2)      #The average absolute correlation is about 0.05
 
 Leary, Bhaskar and Keane (2003) modified the work of Morris and Mitchell (1995). They showed that orthogonal-array-based LHD (OALHD) with SA converges faster and generates better designs. Our function "OASA" implements their algorithm. 
 
-The function "OA2LHD" makes "OASA" workable since it is capable of transfering an Orthogonal Array (OA) into an LHD with corresponding size, based on the work of Tang (1993). The following code shows examples of both "OA2LHD" and "OASA".
+The function "OA2LHD" makes "OASA" workable since it is capable of transferring an Orthogonal Array (OA) into an LHD with corresponding size, based on the work of Tang (1993). The following code shows examples of both "OA2LHD" and "OASA".
 
 ```{r}
 #create an OA(9,2,3,2)
@@ -214,4 +214,42 @@ phi_p(X=tryGA_92,p=15)
 set.seed(1)
 tryGA=GA(n=6,k=3,OC="AvgAbsCor")
 AvgAbsCor(tryGA)      #The average absolute correlation is about 0.07
+```
+
+In addition to above algorithms, Wang, L., Xiao, Q., and Xu, H. (2018) proposed a construction method for maximin $L_1$ distance LHDs based on good lattice point designs. One big advantage is that their method gives instant solutions, and this is very helpful for practitioners who seek immediate results. See the following code and example.
+
+```{r}
+#n by n design when 2n+1 is prime
+try=FastMmLHD(8,8)
+try
+phi_p(try)   #calculate the phi_p of "try".
+
+#n by n design when n+1 is prime
+try2=FastMmLHD(12,12)
+try2
+phi_p(try2)   #calculate the phi_p of "try2".
+
+#n by n-1 design when n is prime
+try3=FastMmLHD(7,6)
+try3
+phi_p(try3)   #calculate the phi_p of "try3".
+
+#General cases
+try4=FastMmLHD(24,8)
+try4
+phi_p(try4)   #calculate the phi_p of "try4".
+```
+
+Besides maximin distance LHDs, orthogonal Latin hypercube designs (OLHDs) are popular as well. Ye (1998) proposed a contruction method for generating OHLDs. Our function "OLHD1998" implements his method. See the following code and example.
+
+```{r}
+#create an orthogonal LHD with m=3. So n=2^m+1=9 and k=2*m-2=4
+tryOLHD=OLHD1998(m=3)
+tryOLHD
+MaxAbsCor(tryOLHD)  #zero columnwise correlations
+
+#create an orthogonal LHD with m=4. So n=2^m+1=17 and k=2*m-2=6
+tryOLHD2=OLHD1998(m=4)
+tryOLHD2
+MaxAbsCor(tryOLHD2)  #zero columnwise correlations
 ```

@@ -1,15 +1,11 @@
 #' Exchange two random elements
 #'
-#' \code{exchange} returns a new design matrix after two randomly selected elements are switched from a user-defined column.
+#' \code{exchange} returns a new design matrix after two randomly selected elements are switched from a user-defined column
 #'
-#' @param X A Matrix.
-#' @param j A positive integer.
+#' @param X A matrix object. In general, \code{X} stands for the design matrix.
+#' @param j A positive integer, which stands for the j^{th} column of \code{X}, and it should be in [1,ncol(X)].
 #'
 #' @return If all inputs are logical, then the output will be a new design matrix after the exchange.
-#' @details \itemize{
-#' \item \code{X} stands for the design matrix.
-#' \item \code{j} is the j^th column of the design matrix, and it should be in [1,ncol(X)].
-#' }
 #'
 #' @examples
 #' #create a toy LHD with 5 rows and 3 columns

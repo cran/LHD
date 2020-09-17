@@ -2,15 +2,10 @@
 #'
 #' \code{MaxProCriterion} returns the maximum projection criterion of an LHD
 #'
-#' @param X A Matrix.
+#' @param X A matrix object. In general, \code{X} stands for the design matrix.
 #'
 #' @return If all inputs are logical, then the output will be a positive number indicating maximum projection criterion.
-#' @details \itemize{
-#' \item \code{X} stands for the design matrix.
-#' \item The maximum projection criterion formula is given by the Note Section below.
-#' }
-#'
-#' @note \code{maximum projection criterion = \\Bigg\{ \\frac{1}{{n \\choose 2}} \\sum_{i=1}^{n-1} \\sum_{j=i+1}^{n} \\frac{1}{\\Pi_{l=1}^{k}(x_{il}-x_{jl})^2}  \\Bigg\}^{1/k}}
+#' \code{maximum projection criterion = \\Bigg\{ \\frac{1}{{n \\choose 2}} \\sum_{i=1}^{n-1} \\sum_{j=i+1}^{n} \\frac{1}{\\Pi_{l=1}^{k}(x_{il}-x_{jl})^2}  \\Bigg\}^{1/k}}
 #'
 #' @references Joseph, V. R., Gul, E., and Ba, S. (2015) Maximum projection designs for computer experiments. \emph{Biometrika}, \strong{102}, 371-380.
 #'

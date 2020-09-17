@@ -1,16 +1,11 @@
 #' Calculate the Maximum Absolute Correlation
 #'
-#' \code{MaxAbsCor} returns the maximum absolute correlation of an LHD
+#' \code{MaxAbsCor} returns the maximum absolute correlation of a matrix
 #'
-#' @param X A Matrix.
+#' @param X A matrix object. In general, \code{X} stands for the design matrix.
 #'
 #' @return If all inputs are logical, then the output will be a positive number indicating maximum absolute correlation.
-#' @details \itemize{
-#' \item \code{X} stands for the design matrix.
-#' \item The maximum absolute correlation formula is given by the Note Section below.
-#' }
-#'
-#' @note \code{maximum absolute correlation = max_{ij} |q_{ij}|}
+#' \code{maximum absolute correlation = max_{ij} |q_{ij}|}
 #'
 #' @references Georgiou, S. D. (2009) Orthogonal Latin hypercube designs from generalized orthogonal designs. \emph{Journal of Statistical Planning and Inference}, \strong{139}, 1530-1540.
 #'

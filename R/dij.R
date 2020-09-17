@@ -2,19 +2,12 @@
 #'
 #' \code{dij} returns the inter-site distance of two design points of an LHD
 #'
-#' @param X A Matrix.
-#' @param i A positive integer.
-#' @param j A positive integer.
-#' @param q The default is set to be 1, and it could be either 1 or 2.
+#' @param X A matrix object. In general, \code{X} stands for the design matrix.
+#' @param i A positive integer, which stands for the i^{th} row of \code{X}.
+#' @param j A positive integer, which stands for the j^{th} row of \code{X}. Both \code{i} and \code{j} should be in [1,nrow(X)] and they should not be equal to each other.
+#' @param q The default is set to be 1, and it could be either 1 or 2. If \code{q} is 1, \code{dij} is the Manhattan (rectangular) distance. If \code{q} is 2, \code{dij} is the Euclidean distance.
 #'
-#' @return If all inputs are logical, then the output will be a positive number indicating the distance.
-#' @details \itemize{
-#' \item \code{X} stands for the design matrix.
-#' \item \code{i} stands for the i^{th} row of \code{X}.
-#' \item \code{j} stands for the j^{th} row of \code{X}.
-#' \item Both \code{i} and \code{j} should be in [1,nrow(X)] and they should not be equal to each other.
-#' \item If \code{q} is 1 (the default setting), \code{dij} is the rectangular distance. If \code{q} is 2, \code{dij} is the Euclidean distance.
-#' }
+#' @return If all inputs are logical, then the output will be a positive number indicating the distance. \code{dij =  \\left\\{ \\sum_{k=1}^{m} \\vert x_{ik}-x_{jk}\\vert ^q \\right\\}^{1/q}}
 #'
 #' @examples
 #' #create a toy LHD with 5 rows and 3 columns

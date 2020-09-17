@@ -7,21 +7,13 @@
 OA2LHD(OA)
 }
 \arguments{
-\item{OA}{A Matrix.}
+\item{OA}{An orthogonal array matrix.}
 }
 \value{
-If the input is logical, then the output will be an LHD whose sizes are the same as input OA.
+If the input is logical, then the output will be an LHD whose sizes are the same as input OA. The assumption is that the elements of OAs must be positive.
 }
 \description{
 \code{OA2LHD} transfers an OA into an LHD with corresponding size
-}
-\details{
-\itemize{
-\item \code{OA} stands for the input orthogonal array matrix.
-}
-}
-\note{
-The assumption is that the elements of OAs must be positive.
 }
 \examples{
 #create an OA(9,2,3,2)

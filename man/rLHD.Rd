@@ -7,21 +7,15 @@
 rLHD(n, k)
 }
 \arguments{
-\item{n}{A positive integer.}
+\item{n}{A positive integer, which stands for the number of rows (or run size).}
 
-\item{k}{A positive integer.}
+\item{k}{A positive integer, which stands for the number of columns (or factor size).}
 }
 \value{
 If all inputs are positive integer, then the output will be a \code{n} by \code{k} design matrix.
 }
 \description{
-\code{rLHD} returns an Latin hypercube design matrix with user-defined dimention
-}
-\details{
-\itemize{
-\item \code{n} stands for the number of rows (or run size).
-\item \code{k} stands for the number of columns (or the number of factors).
-}
+\code{rLHD} returns a random Latin hypercube design matrix with user-defined dimention
 }
 \examples{
 #create a toy LHD with 5 rows and 3 columns

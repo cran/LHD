@@ -7,22 +7,14 @@
 MaxAbsCor(X)
 }
 \arguments{
-\item{X}{A Matrix.}
+\item{X}{A matrix object. In general, \code{X} stands for the design matrix.}
 }
 \value{
 If all inputs are logical, then the output will be a positive number indicating maximum absolute correlation.
+\code{maximum absolute correlation = max_{ij} |q_{ij}|}
 }
 \description{
-\code{MaxAbsCor} returns the maximum absolute correlation of an LHD
-}
-\details{
-\itemize{
-\item \code{X} stands for the design matrix.
-\item The maximum absolute correlation formula is given by the Note Section below.
-}
-}
-\note{
-\code{maximum absolute correlation = max_{ij} |q_{ij}|}
+\code{MaxAbsCor} returns the maximum absolute correlation of a matrix
 }
 \examples{
 #create a toy LHD with 5 rows and 3 columns

@@ -7,28 +7,19 @@
 dij(X, i, j, q = 1)
 }
 \arguments{
-\item{X}{A Matrix.}
+\item{X}{A matrix object. In general, \code{X} stands for the design matrix.}
 
-\item{i}{A positive integer.}
+\item{i}{A positive integer, which stands for the i^{th} row of \code{X}.}
 
-\item{j}{A positive integer.}
+\item{j}{A positive integer, which stands for the j^{th} row of \code{X}. Both \code{i} and \code{j} should be in [1,nrow(X)] and they should not be equal to each other.}
 
-\item{q}{The default is set to be 1, and it could be either 1 or 2.}
+\item{q}{The default is set to be 1, and it could be either 1 or 2. If \code{q} is 1, \code{dij} is the Manhattan (rectangular) distance. If \code{q} is 2, \code{dij} is the Euclidean distance.}
 }
 \value{
-If all inputs are logical, then the output will be a positive number indicating the distance.
+If all inputs are logical, then the output will be a positive number indicating the distance. \code{dij =  \\left\\{ \\sum_{k=1}^{m} \\vert x_{ik}-x_{jk}\\vert ^q \\right\\}^{1/q}}
 }
 \description{
 \code{dij} returns the inter-site distance of two design points of an LHD
-}
-\details{
-\itemize{
-\item \code{X} stands for the design matrix.
-\item \code{i} stands for the i^{th} row of \code{X}.
-\item \code{j} stands for the j^{th} row of \code{X}.
-\item Both \code{i} and \code{j} should be in [1,nrow(X)] and they should not be equal to each other.
-\item If \code{q} is 1 (the default setting), \code{dij} is the rectangular distance. If \code{q} is 2, \code{dij} is the Euclidean distance.
-}
 }
 \examples{
 #create a toy LHD with 5 rows and 3 columns
