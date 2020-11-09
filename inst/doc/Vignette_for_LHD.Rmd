@@ -240,16 +240,67 @@ try4
 phi_p(try4)   #calculate the phi_p of "try4".
 ```
 
-Besides maximin distance LHDs, orthogonal Latin hypercube designs (OLHDs) are popular as well. Ye (1998) proposed a contruction method for generating OHLDs. Our function "OLHD1998" implements his method. See the following code and example.
+Besides maximin distance LHDs, orthogonal Latin hypercube designs (OLHDs) are popular as well. Ye (1998) proposed a contruction method for generating OHLDs. Our function "OLHD1998" implements this method. See the following code and example.
 
 ```{r}
-#create an orthogonal LHD with m=3. So n=2^m+1=9 and k=2*m-2=4
-tryOLHD=OLHD1998(m=3)
+#create an orthogonal LHD with m=4. So n=2^m+1=17 and k=2*m-2=6
+tryOLHD=OLHD1998(m=4)
 tryOLHD
 MaxAbsCor(tryOLHD)  #zero columnwise correlations
+```
 
-#create an orthogonal LHD with m=4. So n=2^m+1=17 and k=2*m-2=6
-tryOLHD2=OLHD1998(m=4)
+Cioppa and Lucas (2007) extended Ye's idea, and their method accommodates more factors given the same run size. Our function "OLHD2007" implements this method. See the following code and example. 
+
+```{r}
+#create an orthogonal LHD with m=4. So n=2^m+1=17 and k=4+3=7
+tryOLHD=OLHD2007(m=4)
+tryOLHD
+MaxAbsCor(tryOLHD)  #zero columnwise correlations
+```
+
+Lin et al. (2009) proposed to couple an OLHD and an OA to generate OLHDs with large factor size. Our function "OLHD2009" implements this method. See the following code and example. 
+
+```{r}
+#create a 5 by 2 OLHD
+OLHD=OLHD2007(m=2)
+
+#create an OA(25,6,5,2)
+OA=matrix(c(2,2,2,2,2,1,2,1,5,4,3,5,3,2,1,5,4,5,1,5,4,3,2,5,
+4,1,3,5,2,3,1,2,3,4,5,2,1,3,5,2,4,3,1,1,1,1,1,1,4,3,2,1,5,5,
+5,5,5,5,5,1,4,4,4,4,4,1,3,1,4,2,5,4,3,3,3,3,3,1,3,5,2,4,1,3,
+3,4,5,1,2,2,5,4,3,2,1,5,2,3,4,5,1,2,2,5,3,1,4,4,1,4,2,5,3,4,
+4,2,5,3,1,4,2,4,1,3,5,3,5,3,1,4,2,4,5,2,4,1,3,3,5,1,2,3,4,2,
+4,5,1,2,3,2),ncol=6,nrow=25,byrow=T)
+
+#Construct a 25 by 12 OLHD
+tryOLHD=OLHD2009(OLHD,OA)
+tryOLHD
+MaxAbsCor(tryOLHD)  #zero columnwise correlations
+```
+
+Sun et al. (2010) proposed to construct OLHDs with flexible run sizes. Our function "OLHD2010" implements this method. See the following code and example. 
+
+```{r}
+#create an orthogonal LHD with C=3, r=3, type="odd".
+#So n=3*2^4+1=49 and k=2^3=8
+tryOLHD1=OLHD2010(C=3,r=3,type="odd")
+tryOLHD1
+
+#create an orthogonal LHD with C=3, r=3, type="even".
+#So n=3*2^4=48 and k=2^3=8
+tryOLHD2=OLHD2010(C=3,r=3,type="even")
 tryOLHD2
+
+MaxAbsCor(tryOLHD1)  #zero columnwise correlations
 MaxAbsCor(tryOLHD2)  #zero columnwise correlations
+```
+
+Butler (2001) proposed to construct OLHDs using Williams transformation. Our function "OLHD2001" implements this method. See the following code and example. 
+
+```{r}
+#create an orthogonal LHD with n=11 and k=5
+OLHD2001(n=11,k=5)
+
+#create an orthogonal LHD with n=7 and k=6
+OLHD2001(n=7,k=6)
 ```

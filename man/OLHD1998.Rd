@@ -24,5 +24,5 @@ OLHD1998(m=4)
 
 }
 \references{
-Ye, K. Q. (1998) Orthogonal column Latin hypercubes and their application in computer experiments. \emph{Journal of the American Statistical Association}, \strong{93}(444), 1430-1439.
+Ye, K.Q. (1998) Orthogonal column Latin hypercubes and their application in computer experiments. \emph{Journal of the American Statistical Association}, \strong{93}(444), 1430-1439.
 }

@@ -1,3 +1,12 @@
+\#LHD 1.3.0
+Part I - We added the following four functions:
+
+OLHD2001, OLHD2007, OLHD2009, and OLHD2010.
+
+These new functions are construction methods for orthogonal LHDs.
+
+Part II - The DESCRIPTION file, documentations (.Rd files), vignettes, and test files were updated accordingly.
+
 \#LHD 1.2.0
 Part I - We added the following six functions:
 
