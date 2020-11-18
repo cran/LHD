@@ -1,69 +1,72 @@
-\#LHD 1.3.0
-Part I - We added the following four functions:
+#LHD 1.3.1
 
-OLHD2001, OLHD2007, OLHD2009, and OLHD2010.
+* The following five functions were re-named to avoid confusions: `OLHD1998`, `OLHD2001`, `OLHD2007`, `OLHD2009`, and `OLHD2010`.
+  - `OLHD1998` now is called `OLHD.Y1998`.
+  - `OLHD2001` now is called `OLHD.B2001`.
+  - `OLHD2007` now is called `OLHD.C2007`.
+  - `OLHD2009` now is called `OLHD.L2009`.
+  - `OLHD2010` now is called `OLHD.S2010`.
+  
+* Functions `LOO`, `LPWT`, and `MWT` are integrated into function `FastMmLHD`.
 
-These new functions are construction methods for orthogonal LHDs.
+* The DESCRIPTION file, documentations (.Rd files), vignettes, and test files were updated accordingly.
+  - Documentations were updated to provide recommendations to new users on how to set input arguments properly.
 
-Part II - The DESCRIPTION file, documentations (.Rd files), vignettes, and test files were updated accordingly.
+#LHD 1.3.0
 
-\#LHD 1.2.0
-Part I - We added the following six functions:
+* Part I - We added the following four functions: `OLHD2001`, `OLHD2007`, `OLHD2009`, and `OLHD2010`.
 
-FastMmLHD, GLP, LOO, LPWT, MWT, OLHD1998, and WT.
+  - These new functions are construction methods for orthogonal LHDs.
 
-OLHD1998 is a construction method for orthogonal LHDs. The rest functions are methods for 
-maximin distance LHDs under L_1 distance.
+* Part II - The DESCRIPTION file, documentations (.Rd files), vignettes, and test files were updated accordingly.
 
-Part II - We updated all the existing functions:
+#LHD 1.2.0
 
-1. To be more informative, the documentations of all the existing functions have been updated.
+* Part I - We added the following six functions: `FastMmLHD`, `GLP`, `LOO`, `LPWT`, `MWT`, `OLHD1998`, and `WT`.
 
-2. A new input argument, maxtime, was added for each of the following algorithm functions:
+  - `OLHD1998` is a construction method for generating orthogonal LHDs. The rest functions are construction methods for maximin distance LHDs under L_1 distance.
 
-SA, OASA, SA2008, SLHD, LaPSO, and GA.
+* Part II - We updated all the existing functions:
 
-Now users can define a maximum CPU time for each of those six algorithm functions. In addition,
-a progress bar will show up in R console to keep users informed about the situation of algorithm.
+  - To be more informative, the documentations of all the existing functions have been updated.
 
-Part III - The DESCRIPTION file, documentations (.Rd files), vignettes, and test files were updated accordingly.
+  - A new input argument, maxtime, was added for each of the following algorithm functions: `SA`, `OASA`, `SA2008`, `SLHD`, `LaPSO`, and `GA`. Now users can define a maximum CPU time using that input argument. In addition, a progress bar will show up in the R console to inform users the overall progress.
 
-\#LHD 1.1.0
-This is a big update for the whole package.
+* Part III - The DESCRIPTION file, documentations (.Rd files), vignettes, and test files were updated accordingly.
 
-Part I - We added the following three optimality criteria functions:
+#LHD 1.1.0
 
-Average absolute correlation (function name: AvgAbsCor)
+* Part I - We added the following three optimality criteria functions:
 
-Maximum absolute correlation (function name: MaxAbsCor)
+  - Average absolute correlation (function name: `AvgAbsCor`)
 
-Maximum projection criterion (function name: MaxProCriterion)
+  - Maximum absolute correlation (function name: `MaxAbsCor`)
 
-Part II - We updated the following functions:
+  - Maximum projection criterion (function name: `MaxProCriterion`)
 
-SA, OA2LHD, OASA, SA2008, SLHD, LaPSO, GA
+* Part II - We updated the following functions: `SA`, `OA2LHD`, `OASA`, `SA2008`, `SLHD`, `LaPSO`, and `GA`.
 
-In the past, only maximin distance LHDs can be generated through these algorithms. Now, the default optimality criterion is the set to be "phi_p" still, which corresponds the maximin distance, but these algorithms are able to generate orthogonal LHDs and maximum projection LHDs, respectively. 
+  - `SA`, `OASA`, `SA2008`, `SLHD`, `LaPSO`, and `GA` will be able to generate maximin distance LHDs, maximum projection LHDs, and nearly orthogonal LHDs from now on, while they can only generate maximin distance LHDs in the past. 
 
-Another modification is that the majority of input arguments now have default settings. For those seeking instant design matrix or quick search, simply input run sizes and factor sizes would be enough. This modification saves times for users.
+  - For `OA2LHD`, users no longer need to provide the parameters of input Orthogonal Array. The function itself will take care of that.
 
-Part III - The DESCRIPTION file, documentations (.Rd files), vignettes, and test files were updated accordingly.
+  - The majority of input arguments now have default settings. For users who seek instant design matrix or quick search, simply input run sizes and factor sizes would be enough. This modification saves times for users.
 
-\#LHD 0.1.3
-Updated SLHD function: The exchanging logic in Stage II has been updated.
+* Part III - The DESCRIPTION file, documentations (.Rd files), vignettes, and test files were updated accordingly.
 
-\#LHD 0.1.2
+#LHD 0.1.3
 
-The following functions have been updated:
+* Updated the `SLHD` function: the exchanging logic in Stage II has been updated.
 
-SA, OASA, SA2008, SLHD, GA, and LaPSO.
+#LHD 0.1.2
 
-The default for p used to be 50, and now is set to be 15. Besides,
-modifications were made for each function above to improve accuracy of
-result. Correspondingly, documentations (.Rd files), vignettes, and test
-files were updated. These updates should also fix the errors from the
-CRAN Package Check Results.
+* The following functions have been updated: `SA`, `OASA`, `SA2008`, `SLHD`, `GA`, and `LaPSO`. 
+  -The default input argument p used to be 50, and now is set to be 15. 
 
-\#LHD 0.1.1
+* Correspondingly, documentations (.Rd files), vignettes, and test files were updated. 
 
-The Description field of DESCRIPTION file has been updated.
+* This update also fixed the errors from the CRAN Package Check Results.
+
+#LHD 0.1.1
+
+* The Description field of DESCRIPTION file has been updated.

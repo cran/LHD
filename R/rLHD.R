@@ -1,6 +1,6 @@
 #' Generate a random Latin Hypercube Design (LHD)
 #'
-#' \code{rLHD} returns a random Latin hypercube design matrix with user-defined dimention
+#' \code{rLHD} returns a random \code{n} by \code{k} Latin hypercube design matrix
 #'
 #' @param n A positive integer, which stands for the number of rows (or run size).
 #' @param k A positive integer, which stands for the number of columns (or factor size).

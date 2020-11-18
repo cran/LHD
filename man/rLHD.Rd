@@ -15,7 +15,7 @@ rLHD(n, k)
 If all inputs are positive integer, then the output will be a \code{n} by \code{k} design matrix.
 }
 \description{
-\code{rLHD} returns a random Latin hypercube design matrix with user-defined dimention
+\code{rLHD} returns a random \code{n} by \code{k} Latin hypercube design matrix
 }
 \examples{
 #create a toy LHD with 5 rows and 3 columns

@@ -159,19 +159,19 @@ phi_p(try4)   #calculate the phi_p of "try4".
 
 ## -----------------------------------------------------------------------------
 #create an orthogonal LHD with m=4. So n=2^m+1=17 and k=2*m-2=6
-tryOLHD=OLHD1998(m=4)
+tryOLHD=OLHD.Y1998(m=4)
 tryOLHD
 MaxAbsCor(tryOLHD)  #zero columnwise correlations
 
 ## -----------------------------------------------------------------------------
 #create an orthogonal LHD with m=4. So n=2^m+1=17 and k=4+3=7
-tryOLHD=OLHD2007(m=4)
+tryOLHD=OLHD.C2007(m=4)
 tryOLHD
 MaxAbsCor(tryOLHD)  #zero columnwise correlations
 
 ## -----------------------------------------------------------------------------
 #create a 5 by 2 OLHD
-OLHD=OLHD2007(m=2)
+OLHD=OLHD.C2007(m=2)
 
 #create an OA(25,6,5,2)
 OA=matrix(c(2,2,2,2,2,1,2,1,5,4,3,5,3,2,1,5,4,5,1,5,4,3,2,5,
@@ -182,19 +182,19 @@ OA=matrix(c(2,2,2,2,2,1,2,1,5,4,3,5,3,2,1,5,4,5,1,5,4,3,2,5,
 4,5,1,2,3,2),ncol=6,nrow=25,byrow=T)
 
 #Construct a 25 by 12 OLHD
-tryOLHD=OLHD2009(OLHD,OA)
+tryOLHD=OLHD.L2009(OLHD,OA)
 tryOLHD
 MaxAbsCor(tryOLHD)  #zero columnwise correlations
 
 ## -----------------------------------------------------------------------------
 #create an orthogonal LHD with C=3, r=3, type="odd".
 #So n=3*2^4+1=49 and k=2^3=8
-tryOLHD1=OLHD2010(C=3,r=3,type="odd")
+tryOLHD1=OLHD.S2010(C=3,r=3,type="odd")
 tryOLHD1
 
 #create an orthogonal LHD with C=3, r=3, type="even".
 #So n=3*2^4=48 and k=2^3=8
-tryOLHD2=OLHD2010(C=3,r=3,type="even")
+tryOLHD2=OLHD.S2010(C=3,r=3,type="even")
 tryOLHD2
 
 MaxAbsCor(tryOLHD1)  #zero columnwise correlations
@@ -202,8 +202,8 @@ MaxAbsCor(tryOLHD2)  #zero columnwise correlations
 
 ## -----------------------------------------------------------------------------
 #create an orthogonal LHD with n=11 and k=5
-OLHD2001(n=11,k=5)
+OLHD.B2001(n=11,k=5)
 
 #create an orthogonal LHD with n=7 and k=6
-OLHD2001(n=7,k=6)
+OLHD.B2001(n=7,k=6)
 

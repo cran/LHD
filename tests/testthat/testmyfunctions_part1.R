@@ -42,8 +42,8 @@ test_that("Generate a maximin distance LHD matrix with dimension n by k via GA",
 })
 
 test_that("Generate an orthogonal LHD matrix via OLHD1998", {
-  expect_equal(dim(OLHD1998(m=3)),c(9,4))
-  expect_equal(dim(OLHD1998(m=4)),c(17,6))
+  expect_equal(dim(OLHD.Y1998(m=3)),c(9,4))
+  expect_equal(dim(OLHD.Y1998(m=4)),c(17,6))
 })
 
 test_that("Generate a good lattice point design matrix with dimension n by k via GLP", {
@@ -57,22 +57,6 @@ test_that("Implement the Williams transformation on a n by k matrix via WT", {
   expect_equal(dim(WT(X-5)),c(6,3))
 })
 
-test_that("Implement the modified Williams transformation on a n by k matrix via MWT", {
-  X=matrix(c(1,3,5,4,2,2,3,6,6,6,4,4,2,1,3,5,5,1),ncol=3,nrow=6,byrow=TRUE)
-  expect_equal(dim(MWT(X)),c(6,3))
-  expect_equal(dim(MWT(X+5)),c(6,3))
-})
-
-test_that("Generate a maximin distance LHD matrix with dimension n by k via LPWT", {
-  expect_equal(dim(LPWT(n=6,k=3)[[1]]),c(6,3))
-  expect_equal(dim(LPWT(n=9,k=2)[[1]]),c(9,2))
-})
-
-test_that("Generate a maximin distance LHD matrix with dimension n by k via LOO", {
-  expect_equal(dim(LOO(n=6,k=3)[[1]]),c(6,3))
-  expect_equal(dim(LOO(n=9,k=2)[[1]]),c(9,2))
-})
-
 test_that("Generate a maximin distance LHD matrix with dimension n by k via FastMmLHD", {
   expect_equal(dim(FastMmLHD(n=6,k=3)),c(6,3))
   expect_equal(dim(FastMmLHD(n=9,k=2)),c(9,2))
@@ -80,12 +64,12 @@ test_that("Generate a maximin distance LHD matrix with dimension n by k via Fast
 
 
 test_that("Generate an orthogonal LHD matrix via OLHD2007", {
-  expect_equal(dim(OLHD2007(m=4)),c(17,7))
-  expect_equal(dim(OLHD2007(m=5)),c(33,11))
+  expect_equal(dim(OLHD.C2007(m=4)),c(17,7))
+  expect_equal(dim(OLHD.C2007(m=5)),c(33,11))
 })
 
 test_that("Generate an orthogonal LHD matrix via OLHD2009", {
-  OLHD=OLHD2007(m=2)
+  OLHD=OLHD.C2007(m=2)
   OA=matrix(c(2,2,2,2,2,1,2,1,5,4,3,5,3,2,1,5,4,5,1,5,4,3,2,5,
               4,1,3,5,2,3,1,2,3,4,5,2,1,3,5,2,4,3,1,1,1,1,1,1,4,3,2,1,5,5,
               5,5,5,5,5,1,4,4,4,4,4,1,3,1,4,2,5,4,3,3,3,3,3,1,3,5,2,4,1,3,
@@ -93,15 +77,15 @@ test_that("Generate an orthogonal LHD matrix via OLHD2009", {
               4,2,5,3,1,4,2,4,1,3,5,3,5,3,1,4,2,4,5,2,4,1,3,3,5,1,2,3,4,2,
               4,5,1,2,3,2),ncol=6,nrow=25,byrow=T)
 
-  expect_equal(dim(OLHD2009(OLHD,OA)),c(25,12))
+  expect_equal(dim(OLHD.L2009(OLHD,OA)),c(25,12))
 })
 
 test_that("Generate an orthogonal LHD matrix via OLHD2010", {
-  expect_equal(dim(OLHD2010(C=3,r=3,type="odd")),c(49,8))
-  expect_equal(dim(OLHD2010(C=3,r=3,type="even")),c(48,8))
+  expect_equal(dim(OLHD.S2010(C=3,r=3,type="odd")),c(49,8))
+  expect_equal(dim(OLHD.S2010(C=3,r=3,type="even")),c(48,8))
 })
 
 test_that("Generate an orthogonal LHD matrix via OLHD2001", {
-  expect_equal(dim(OLHD2001(n=11,k=5)),c(11,5))
-  expect_equal(dim(OLHD2001(n=7,k=6)),c(7,6))
+  expect_equal(dim(OLHD.B2001(n=11,k=5)),c(11,5))
+  expect_equal(dim(OLHD.B2001(n=7,k=6)),c(7,6))
 })

@@ -2,7 +2,7 @@
 title: "Vignette for Package LHD"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette for LHD}
+  %\VignetteIndexEntry{Vignette for Package LHD}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 ```
 
 
-This vignette gives a high level overview on how to use the R package LHD to generate different types of efficient Latin hypercube designs (LHDs) via different algorithms. In addition, popular optimality criteria as well as some handy and helpful functions will be introduced as well.
+This vignette gives a high level overview on how to use the R package LHD to generate different types of efficient Latin hypercube designs (LHDs) with flexible sizes. Popular optimality criteria along with other useful functions will be introduced as well.
 
 \
 
@@ -240,29 +240,29 @@ try4
 phi_p(try4)   #calculate the phi_p of "try4".
 ```
 
-Besides maximin distance LHDs, orthogonal Latin hypercube designs (OLHDs) are popular as well. Ye (1998) proposed a contruction method for generating OHLDs. Our function "OLHD1998" implements this method. See the following code and example.
+Besides maximin distance LHDs, orthogonal Latin hypercube designs (OLHDs) are popular as well. Ye (1998) proposed a construction method for generating OHLDs. Our function "OLHD.Y1998" implements this method. See the following code and example.
 
 ```{r}
 #create an orthogonal LHD with m=4. So n=2^m+1=17 and k=2*m-2=6
-tryOLHD=OLHD1998(m=4)
+tryOLHD=OLHD.Y1998(m=4)
 tryOLHD
 MaxAbsCor(tryOLHD)  #zero columnwise correlations
 ```
 
-Cioppa and Lucas (2007) extended Ye's idea, and their method accommodates more factors given the same run size. Our function "OLHD2007" implements this method. See the following code and example. 
+Cioppa and Lucas (2007) extended Ye's idea, and their method is able to accommodate more factors with the same run size. Our function "OLHD.C2007" implements this method. See the following code and example. 
 
 ```{r}
 #create an orthogonal LHD with m=4. So n=2^m+1=17 and k=4+3=7
-tryOLHD=OLHD2007(m=4)
+tryOLHD=OLHD.C2007(m=4)
 tryOLHD
 MaxAbsCor(tryOLHD)  #zero columnwise correlations
 ```
 
-Lin et al. (2009) proposed to couple an OLHD and an OA to generate OLHDs with large factor size. Our function "OLHD2009" implements this method. See the following code and example. 
+Lin et al. (2009) proposed to couple OLHDs with OAs to generate OLHDs with large factor size. Our function "OLHD.L2009" implements this method. See the following code and example. 
 
 ```{r}
 #create a 5 by 2 OLHD
-OLHD=OLHD2007(m=2)
+OLHD=OLHD.C2007(m=2)
 
 #create an OA(25,6,5,2)
 OA=matrix(c(2,2,2,2,2,1,2,1,5,4,3,5,3,2,1,5,4,5,1,5,4,3,2,5,
@@ -273,34 +273,34 @@ OA=matrix(c(2,2,2,2,2,1,2,1,5,4,3,5,3,2,1,5,4,5,1,5,4,3,2,5,
 4,5,1,2,3,2),ncol=6,nrow=25,byrow=T)
 
 #Construct a 25 by 12 OLHD
-tryOLHD=OLHD2009(OLHD,OA)
+tryOLHD=OLHD.L2009(OLHD,OA)
 tryOLHD
 MaxAbsCor(tryOLHD)  #zero columnwise correlations
 ```
 
-Sun et al. (2010) proposed to construct OLHDs with flexible run sizes. Our function "OLHD2010" implements this method. See the following code and example. 
+Sun et al. (2010) proposed to construct OLHDs with flexible run sizes via matrices manipulations. Our function "OLHD.S2010" implements this method. See the following code and example. 
 
 ```{r}
 #create an orthogonal LHD with C=3, r=3, type="odd".
 #So n=3*2^4+1=49 and k=2^3=8
-tryOLHD1=OLHD2010(C=3,r=3,type="odd")
+tryOLHD1=OLHD.S2010(C=3,r=3,type="odd")
 tryOLHD1
 
 #create an orthogonal LHD with C=3, r=3, type="even".
 #So n=3*2^4=48 and k=2^3=8
-tryOLHD2=OLHD2010(C=3,r=3,type="even")
+tryOLHD2=OLHD.S2010(C=3,r=3,type="even")
 tryOLHD2
 
 MaxAbsCor(tryOLHD1)  #zero columnwise correlations
 MaxAbsCor(tryOLHD2)  #zero columnwise correlations
 ```
 
-Butler (2001) proposed to construct OLHDs using Williams transformation. Our function "OLHD2001" implements this method. See the following code and example. 
+Butler (2001) proposed to construct OLHDs using Williams transformation. Our function "OLHD.B2001" implements this method. See the following code and example. 
 
 ```{r}
 #create an orthogonal LHD with n=11 and k=5
-OLHD2001(n=11,k=5)
+OLHD.B2001(n=11,k=5)
 
 #create an orthogonal LHD with n=7 and k=6
-OLHD2001(n=7,k=6)
+OLHD.B2001(n=7,k=6)
 ```

@@ -20,7 +20,7 @@ OASA(
 \arguments{
 \item{OA}{An orthogonal array matrix.}
 
-\item{N}{A positive integer, which stands for the number of iterations. The default is set to be 10.}
+\item{N}{A positive integer, which stands for the number of iterations. The default is set to be 10. A large value of \code{N} will result a high CPU time, and it is recommended to be no greater than 500.}
 
 \item{T0}{A positive number, which stands for the user-defined initial temperature. The default is set to be 10.}
 
@@ -28,7 +28,7 @@ OASA(
 
 \item{Tmin}{A positive number, which stands for the minimium temperature allowed. When current temperature becomes smaller or equal to \code{Tmin}, the stopping criterion for current loop is met. The default is set to be 1.}
 
-\item{Imax}{A positive integer, which stands for the maximum perturbations the algorithm will try without improvements before temperature is reduced. For the computation complexity consideration, \code{Imax} is recommended to be smaller or equal to 5, which is the default setting.}
+\item{Imax}{A positive integer, which stands for the maximum perturbations the algorithm will try without improvements before temperature is reduced. The default is set to be 5. For the computation complexity consideration, \code{Imax} is recommended to be smaller or equal to 5.}
 
 \item{OC}{An optimality criterion. The default setting is "phi_p", and it could be one of the following: "phi_p", "AvgAbsCor", "MaxAbsCor", "MaxProCriterion".}
 
@@ -46,19 +46,19 @@ If all inputs are logical, then the output will be an LHD whose sizes are the sa
 }
 \examples{
 #create an OA(9,2,3,2)
-OA=matrix(c(rep(1:3,each=3),rep(1:3,times=3)),ncol=2,nrow=9,byrow = FALSE);OA
+OA=matrix(c(rep(1:3,each=3),rep(1:3,times=3)),ncol=2,nrow=9,byrow = FALSE)
 
 #Use above "OA" as the input OA to generate a 9 by 2 maximin distance LHD
 #with the default setting
-tryOASA=OASA(OA=OA)
-tryOASA
-phi_p(tryOASA)   #calculate the phi_p of "tryOASA".
+try=OASA(OA=OA)
+try
+phi_p(try)   #calculate the phi_p of "try".
 
 #Another example
 #generate a 9 by 2 nearly orthogonal LHD
-tryOASA2=OASA(OA=OA,OC="MaxAbsCor")
-tryOASA2
-MaxAbsCor(tryOASA2)  #calculate the maximum absolute correlation.
+try2=OASA(OA=OA,OC="MaxAbsCor")
+try2
+MaxAbsCor(try2)  #calculate the maximum absolute correlation.
 }
 \references{
 Leary, S., Bhaskar, A., and Keane, A. (2003) Optimal orthogonal-array-based latin hypercubes. \emph{Journal of Applied Statistics}, \strong{30}, 585-598.

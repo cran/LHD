@@ -12,8 +12,8 @@
 #' toy=rLHD(n=5,k=3);toy
 #'
 #' #Choose the first column of toy and exchange two randomly selected elements.
-#' toy_new=exchange(X=toy,j=1)
-#' toy;toy_new
+#' try=exchange(X=toy,j=1)
+#' toy;try
 #' @export
 
 exchange=function(X,j){

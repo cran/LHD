@@ -367,7 +367,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
-<p>This vignette gives a high level overview on how to use the R package LHD to generate different types of efficient Latin hypercube designs (LHDs) via different algorithms. In addition, popular optimality criteria as well as some handy and helpful functions will be introduced as well.</p>
+<p>This vignette gives a high level overview on how to use the R package LHD to generate different types of efficient Latin hypercube designs (LHDs) with flexible sizes. Popular optimality criteria along with other useful functions will be introduced as well.</p>
 <p><br />
 </p>
 <p>Load the library first.</p>
@@ -448,28 +448,30 @@ ave(|q|) = \frac{2 \sum_{i=1}^{k-1} \sum_{j=i+1}^{k}|q_{ij}|}{k(k-1)}, \, \, max
 <span id="cb7-21"><a href="#cb7-21"></a><span class="co">#The SA function with default setting</span></span>
 <span id="cb7-22"><a href="#cb7-22"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb7-23"><a href="#cb7-23"></a>trySA=<span class="kw">SA</span>(<span class="dt">n=</span><span class="dv">6</span>,<span class="dt">k=</span><span class="dv">3</span>)</span>
-<span id="cb7-24"><a href="#cb7-24"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0.06 seconds&quot;</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0.03 seconds&quot;</span></span>
 <span id="cb7-25"><a href="#cb7-25"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
-<span id="cb7-26"><a href="#cb7-26"></a>trySA</span>
-<span id="cb7-27"><a href="#cb7-27"></a><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
-<span id="cb7-28"><a href="#cb7-28"></a><span class="co">#&gt; [1,]    6    2    3</span></span>
-<span id="cb7-29"><a href="#cb7-29"></a><span class="co">#&gt; [2,]    1    6    4</span></span>
-<span id="cb7-30"><a href="#cb7-30"></a><span class="co">#&gt; [3,]    5    4    6</span></span>
-<span id="cb7-31"><a href="#cb7-31"></a><span class="co">#&gt; [4,]    4    5    2</span></span>
-<span id="cb7-32"><a href="#cb7-32"></a><span class="co">#&gt; [5,]    2    3    1</span></span>
-<span id="cb7-33"><a href="#cb7-33"></a><span class="co">#&gt; [6,]    3    1    5</span></span>
-<span id="cb7-34"><a href="#cb7-34"></a></span>
-<span id="cb7-35"><a href="#cb7-35"></a><span class="co">#The phi_p of trySA is much smaller than the phi_p of X, which was 0.2517586</span></span>
-<span id="cb7-36"><a href="#cb7-36"></a><span class="kw">phi_p</span>(<span class="dt">X=</span>trySA,<span class="dt">p=</span><span class="dv">15</span>) </span>
-<span id="cb7-37"><a href="#cb7-37"></a><span class="co">#&gt; [1] 0.2046486</span></span>
-<span id="cb7-38"><a href="#cb7-38"></a></span>
-<span id="cb7-39"><a href="#cb7-39"></a><span class="co">#Now we try SA function with a different optimality criterion</span></span>
-<span id="cb7-40"><a href="#cb7-40"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb7-41"><a href="#cb7-41"></a>trySA2=<span class="kw">SA</span>(<span class="dt">n=</span><span class="dv">6</span>,<span class="dt">k=</span><span class="dv">3</span>,<span class="dt">OC=</span><span class="st">&quot;AvgAbsCor&quot;</span>)</span>
-<span id="cb7-42"><a href="#cb7-42"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0.08 seconds&quot;</span></span>
-<span id="cb7-43"><a href="#cb7-43"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
-<span id="cb7-44"><a href="#cb7-44"></a><span class="kw">AvgAbsCor</span>(trySA2)      <span class="co">#The average absolute correlation is about 0.05</span></span>
-<span id="cb7-45"><a href="#cb7-45"></a><span class="co">#&gt; [1] 0.02857143</span></span></code></pre></div>
+<span id="cb7-26"><a href="#cb7-26"></a><span class="co">#&gt; [1] &quot;the elements in design matrix is scaled to be 1 to 6&quot;</span></span>
+<span id="cb7-27"><a href="#cb7-27"></a>trySA</span>
+<span id="cb7-28"><a href="#cb7-28"></a><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
+<span id="cb7-29"><a href="#cb7-29"></a><span class="co">#&gt; [1,]    6    2    3</span></span>
+<span id="cb7-30"><a href="#cb7-30"></a><span class="co">#&gt; [2,]    1    6    4</span></span>
+<span id="cb7-31"><a href="#cb7-31"></a><span class="co">#&gt; [3,]    5    4    6</span></span>
+<span id="cb7-32"><a href="#cb7-32"></a><span class="co">#&gt; [4,]    4    5    2</span></span>
+<span id="cb7-33"><a href="#cb7-33"></a><span class="co">#&gt; [5,]    2    3    1</span></span>
+<span id="cb7-34"><a href="#cb7-34"></a><span class="co">#&gt; [6,]    3    1    5</span></span>
+<span id="cb7-35"><a href="#cb7-35"></a></span>
+<span id="cb7-36"><a href="#cb7-36"></a><span class="co">#The phi_p of trySA is much smaller than the phi_p of X, which was 0.2517586</span></span>
+<span id="cb7-37"><a href="#cb7-37"></a><span class="kw">phi_p</span>(<span class="dt">X=</span>trySA,<span class="dt">p=</span><span class="dv">15</span>) </span>
+<span id="cb7-38"><a href="#cb7-38"></a><span class="co">#&gt; [1] 0.2046486</span></span>
+<span id="cb7-39"><a href="#cb7-39"></a></span>
+<span id="cb7-40"><a href="#cb7-40"></a><span class="co">#Now we try SA function with a different optimality criterion</span></span>
+<span id="cb7-41"><a href="#cb7-41"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb7-42"><a href="#cb7-42"></a>trySA2=<span class="kw">SA</span>(<span class="dt">n=</span><span class="dv">6</span>,<span class="dt">k=</span><span class="dv">3</span>,<span class="dt">OC=</span><span class="st">&quot;AvgAbsCor&quot;</span>)</span>
+<span id="cb7-43"><a href="#cb7-43"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0.04 seconds&quot;</span></span>
+<span id="cb7-44"><a href="#cb7-44"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
+<span id="cb7-45"><a href="#cb7-45"></a><span class="co">#&gt; [1] &quot;the elements in design matrix is scaled to be 1 to 6&quot;</span></span>
+<span id="cb7-46"><a href="#cb7-46"></a><span class="kw">AvgAbsCor</span>(trySA2)      <span class="co">#The average absolute correlation is about 0.05</span></span>
+<span id="cb7-47"><a href="#cb7-47"></a><span class="co">#&gt; [1] 0.02857143</span></span></code></pre></div>
 <p>Leary, Bhaskar and Keane (2003) modified the work of Morris and Mitchell (1995). They showed that orthogonal-array-based LHD (OALHD) with SA converges faster and generates better designs. Our function “OASA” implements their algorithm.</p>
 <p>The function “OA2LHD” makes “OASA” workable since it is capable of transferring an Orthogonal Array (OA) into an LHD with corresponding size, based on the work of Tang (1993). The following code shows examples of both “OA2LHD” and “OASA”.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">#create an OA(9,2,3,2)</span></span>
@@ -502,198 +504,213 @@ ave(|q|) = \frac{2 \sum_{i=1}^{k-1} \sum_{j=i+1}^{k}|q_{ij}|}{k(k-1)}, \, \, max
 <span id="cb8-28"><a href="#cb8-28"></a><span class="co">#The OASA function</span></span>
 <span id="cb8-29"><a href="#cb8-29"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb8-30"><a href="#cb8-30"></a>tryOASA=<span class="kw">OASA</span>(<span class="dt">OA=</span>OA)</span>
-<span id="cb8-31"><a href="#cb8-31"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0.14 seconds&quot;</span></span>
+<span id="cb8-31"><a href="#cb8-31"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0.07 seconds&quot;</span></span>
 <span id="cb8-32"><a href="#cb8-32"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
-<span id="cb8-33"><a href="#cb8-33"></a>tryOASA</span>
-<span id="cb8-34"><a href="#cb8-34"></a><span class="co">#&gt;       [,1] [,2]</span></span>
-<span id="cb8-35"><a href="#cb8-35"></a><span class="co">#&gt;  [1,]    3    3</span></span>
-<span id="cb8-36"><a href="#cb8-36"></a><span class="co">#&gt;  [2,]    1    5</span></span>
-<span id="cb8-37"><a href="#cb8-37"></a><span class="co">#&gt;  [3,]    2    9</span></span>
-<span id="cb8-38"><a href="#cb8-38"></a><span class="co">#&gt;  [4,]    5    1</span></span>
-<span id="cb8-39"><a href="#cb8-39"></a><span class="co">#&gt;  [5,]    6    4</span></span>
-<span id="cb8-40"><a href="#cb8-40"></a><span class="co">#&gt;  [6,]    4    7</span></span>
-<span id="cb8-41"><a href="#cb8-41"></a><span class="co">#&gt;  [7,]    8    2</span></span>
-<span id="cb8-42"><a href="#cb8-42"></a><span class="co">#&gt;  [8,]    9    6</span></span>
-<span id="cb8-43"><a href="#cb8-43"></a><span class="co">#&gt;  [9,]    7    8</span></span>
-<span id="cb8-44"><a href="#cb8-44"></a></span>
-<span id="cb8-45"><a href="#cb8-45"></a><span class="co">#The phi_p of tryOASA is smaller than the phi_p of SA </span></span>
-<span id="cb8-46"><a href="#cb8-46"></a><span class="kw">phi_p</span>(<span class="dt">X=</span>tryOASA,<span class="dt">p=</span><span class="dv">15</span>); <span class="kw">phi_p</span>(<span class="dt">X=</span><span class="kw">SA</span>(<span class="dt">n=</span><span class="dv">9</span>,<span class="dt">k=</span><span class="dv">2</span>),<span class="dt">p=</span><span class="dv">15</span>) </span>
-<span id="cb8-47"><a href="#cb8-47"></a><span class="co">#&gt; [1] 0.2899805</span></span>
-<span id="cb8-48"><a href="#cb8-48"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0.15 seconds&quot;</span></span>
-<span id="cb8-49"><a href="#cb8-49"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
-<span id="cb8-50"><a href="#cb8-50"></a><span class="co">#&gt; [1] 0.3356489</span></span>
-<span id="cb8-51"><a href="#cb8-51"></a></span>
-<span id="cb8-52"><a href="#cb8-52"></a><span class="co">#Now we try OASA function with a different optimality criterion</span></span>
-<span id="cb8-53"><a href="#cb8-53"></a>tryOASA2=<span class="kw">OASA</span>(<span class="dt">OA=</span>OA,<span class="dt">OC=</span><span class="st">&quot;AvgAbsCor&quot;</span>)</span>
-<span id="cb8-54"><a href="#cb8-54"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0.04 seconds&quot;</span></span>
-<span id="cb8-55"><a href="#cb8-55"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
-<span id="cb8-56"><a href="#cb8-56"></a><span class="kw">AvgAbsCor</span>(tryOASA2)      <span class="co">#The average absolute correlation is 0</span></span>
-<span id="cb8-57"><a href="#cb8-57"></a><span class="co">#&gt; [1] 0</span></span></code></pre></div>
+<span id="cb8-33"><a href="#cb8-33"></a><span class="co">#&gt; [1] &quot;the elements in design matrix is scaled to be 1 to 9&quot;</span></span>
+<span id="cb8-34"><a href="#cb8-34"></a>tryOASA</span>
+<span id="cb8-35"><a href="#cb8-35"></a><span class="co">#&gt;       [,1] [,2]</span></span>
+<span id="cb8-36"><a href="#cb8-36"></a><span class="co">#&gt;  [1,]    3    3</span></span>
+<span id="cb8-37"><a href="#cb8-37"></a><span class="co">#&gt;  [2,]    1    5</span></span>
+<span id="cb8-38"><a href="#cb8-38"></a><span class="co">#&gt;  [3,]    2    9</span></span>
+<span id="cb8-39"><a href="#cb8-39"></a><span class="co">#&gt;  [4,]    5    1</span></span>
+<span id="cb8-40"><a href="#cb8-40"></a><span class="co">#&gt;  [5,]    6    4</span></span>
+<span id="cb8-41"><a href="#cb8-41"></a><span class="co">#&gt;  [6,]    4    7</span></span>
+<span id="cb8-42"><a href="#cb8-42"></a><span class="co">#&gt;  [7,]    8    2</span></span>
+<span id="cb8-43"><a href="#cb8-43"></a><span class="co">#&gt;  [8,]    9    6</span></span>
+<span id="cb8-44"><a href="#cb8-44"></a><span class="co">#&gt;  [9,]    7    8</span></span>
+<span id="cb8-45"><a href="#cb8-45"></a></span>
+<span id="cb8-46"><a href="#cb8-46"></a><span class="co">#The phi_p of tryOASA is smaller than the phi_p of SA </span></span>
+<span id="cb8-47"><a href="#cb8-47"></a><span class="kw">phi_p</span>(<span class="dt">X=</span>tryOASA,<span class="dt">p=</span><span class="dv">15</span>); <span class="kw">phi_p</span>(<span class="dt">X=</span><span class="kw">SA</span>(<span class="dt">n=</span><span class="dv">9</span>,<span class="dt">k=</span><span class="dv">2</span>),<span class="dt">p=</span><span class="dv">15</span>) </span>
+<span id="cb8-48"><a href="#cb8-48"></a><span class="co">#&gt; [1] 0.2899805</span></span>
+<span id="cb8-49"><a href="#cb8-49"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0.06 seconds&quot;</span></span>
+<span id="cb8-50"><a href="#cb8-50"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
+<span id="cb8-51"><a href="#cb8-51"></a><span class="co">#&gt; [1] &quot;the elements in design matrix is scaled to be 1 to 9&quot;</span></span>
+<span id="cb8-52"><a href="#cb8-52"></a><span class="co">#&gt; [1] 0.3356489</span></span>
+<span id="cb8-53"><a href="#cb8-53"></a></span>
+<span id="cb8-54"><a href="#cb8-54"></a><span class="co">#Now we try OASA function with a different optimality criterion</span></span>
+<span id="cb8-55"><a href="#cb8-55"></a>tryOASA2=<span class="kw">OASA</span>(<span class="dt">OA=</span>OA,<span class="dt">OC=</span><span class="st">&quot;AvgAbsCor&quot;</span>)</span>
+<span id="cb8-56"><a href="#cb8-56"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0.02 seconds&quot;</span></span>
+<span id="cb8-57"><a href="#cb8-57"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
+<span id="cb8-58"><a href="#cb8-58"></a><span class="co">#&gt; [1] &quot;the elements in design matrix is scaled to be 1 to 9&quot;</span></span>
+<span id="cb8-59"><a href="#cb8-59"></a><span class="kw">AvgAbsCor</span>(tryOASA2)      <span class="co">#The average absolute correlation is 0</span></span>
+<span id="cb8-60"><a href="#cb8-60"></a><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 <p>Joseph and Hung (2008) modified the work of Morris and Mitchell (1995) in another way that is able to reduce both <span class="math inline">\(\phi_{p}\)</span> and column-wise correlations at the same time. Our function “SA2008” implements their algorithm. See the following code and example.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb9-2"><a href="#cb9-2"></a>trySA2008_<span class="dv">63</span>=<span class="kw">SA2008</span>(<span class="dt">n=</span><span class="dv">6</span>,<span class="dt">k=</span><span class="dv">3</span>)</span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0.2 seconds&quot;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0.09 seconds&quot;</span></span>
 <span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a>trySA2008_<span class="dv">63</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt; [1,]    4    1    5</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt; [2,]    1    2    3</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt; [3,]    3    6    2</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt; [4,]    6    4    4</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt; [5,]    2    5    6</span></span>
-<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt; [6,]    5    3    1</span></span>
-<span id="cb9-13"><a href="#cb9-13"></a><span class="kw">phi_p</span>(<span class="dt">X=</span>trySA2008_<span class="dv">63</span>,<span class="dt">p=</span><span class="dv">15</span>) </span>
-<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt; [1] 0.203588</span></span>
-<span id="cb9-15"><a href="#cb9-15"></a></span>
-<span id="cb9-16"><a href="#cb9-16"></a><span class="co">#Another example with different n and k</span></span>
-<span id="cb9-17"><a href="#cb9-17"></a>trySA2008_<span class="dv">92</span>=<span class="kw">SA2008</span>(<span class="dt">n=</span><span class="dv">9</span>,<span class="dt">k=</span><span class="dv">2</span>)</span>
-<span id="cb9-18"><a href="#cb9-18"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0.35 seconds&quot;</span></span>
-<span id="cb9-19"><a href="#cb9-19"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
-<span id="cb9-20"><a href="#cb9-20"></a>trySA2008_<span class="dv">92</span></span>
-<span id="cb9-21"><a href="#cb9-21"></a><span class="co">#&gt;       [,1] [,2]</span></span>
-<span id="cb9-22"><a href="#cb9-22"></a><span class="co">#&gt;  [1,]    8    2</span></span>
-<span id="cb9-23"><a href="#cb9-23"></a><span class="co">#&gt;  [2,]    3    6</span></span>
-<span id="cb9-24"><a href="#cb9-24"></a><span class="co">#&gt;  [3,]    5    9</span></span>
-<span id="cb9-25"><a href="#cb9-25"></a><span class="co">#&gt;  [4,]    1    8</span></span>
-<span id="cb9-26"><a href="#cb9-26"></a><span class="co">#&gt;  [5,]    4    1</span></span>
-<span id="cb9-27"><a href="#cb9-27"></a><span class="co">#&gt;  [6,]    7    7</span></span>
-<span id="cb9-28"><a href="#cb9-28"></a><span class="co">#&gt;  [7,]    9    5</span></span>
-<span id="cb9-29"><a href="#cb9-29"></a><span class="co">#&gt;  [8,]    6    4</span></span>
-<span id="cb9-30"><a href="#cb9-30"></a><span class="co">#&gt;  [9,]    2    3</span></span>
-<span id="cb9-31"><a href="#cb9-31"></a><span class="kw">phi_p</span>(<span class="dt">X=</span>trySA2008_<span class="dv">92</span>,<span class="dt">p=</span><span class="dv">15</span>) </span>
-<span id="cb9-32"><a href="#cb9-32"></a><span class="co">#&gt; [1] 0.2899805</span></span>
-<span id="cb9-33"><a href="#cb9-33"></a></span>
-<span id="cb9-34"><a href="#cb9-34"></a><span class="co">#Now we try SA2008 function with a different optimality criterion</span></span>
-<span id="cb9-35"><a href="#cb9-35"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb9-36"><a href="#cb9-36"></a>trySA2008=<span class="kw">SA2008</span>(<span class="dt">n=</span><span class="dv">6</span>,<span class="dt">k=</span><span class="dv">3</span>,<span class="dt">OC=</span><span class="st">&quot;AvgAbsCor&quot;</span>)</span>
-<span id="cb9-37"><a href="#cb9-37"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0.18 seconds&quot;</span></span>
-<span id="cb9-38"><a href="#cb9-38"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
-<span id="cb9-39"><a href="#cb9-39"></a><span class="kw">AvgAbsCor</span>(trySA2008)      <span class="co">#The average absolute correlation is about 0.03</span></span>
-<span id="cb9-40"><a href="#cb9-40"></a><span class="co">#&gt; [1] 0.02857143</span></span></code></pre></div>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; [1] &quot;the elements in design matrix is scaled to be 1 to 6&quot;</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>trySA2008_<span class="dv">63</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt; [1,]    4    1    5</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt; [2,]    1    2    3</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt; [3,]    3    6    2</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt; [4,]    6    4    4</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt; [5,]    2    5    6</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt; [6,]    5    3    1</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="kw">phi_p</span>(<span class="dt">X=</span>trySA2008_<span class="dv">63</span>,<span class="dt">p=</span><span class="dv">15</span>) </span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="co">#&gt; [1] 0.203588</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="co">#Another example with different n and k</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a>trySA2008_<span class="dv">92</span>=<span class="kw">SA2008</span>(<span class="dt">n=</span><span class="dv">9</span>,<span class="dt">k=</span><span class="dv">2</span>)</span>
+<span id="cb9-19"><a href="#cb9-19"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0.11 seconds&quot;</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="co">#&gt; [1] &quot;the elements in design matrix is scaled to be 1 to 9&quot;</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a>trySA2008_<span class="dv">92</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a><span class="co">#&gt;       [,1] [,2]</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a><span class="co">#&gt;  [1,]    8    2</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a><span class="co">#&gt;  [2,]    3    6</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a><span class="co">#&gt;  [3,]    5    9</span></span>
+<span id="cb9-27"><a href="#cb9-27"></a><span class="co">#&gt;  [4,]    1    8</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a><span class="co">#&gt;  [5,]    4    1</span></span>
+<span id="cb9-29"><a href="#cb9-29"></a><span class="co">#&gt;  [6,]    7    7</span></span>
+<span id="cb9-30"><a href="#cb9-30"></a><span class="co">#&gt;  [7,]    9    5</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a><span class="co">#&gt;  [8,]    6    4</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a><span class="co">#&gt;  [9,]    2    3</span></span>
+<span id="cb9-33"><a href="#cb9-33"></a><span class="kw">phi_p</span>(<span class="dt">X=</span>trySA2008_<span class="dv">92</span>,<span class="dt">p=</span><span class="dv">15</span>) </span>
+<span id="cb9-34"><a href="#cb9-34"></a><span class="co">#&gt; [1] 0.2899805</span></span>
+<span id="cb9-35"><a href="#cb9-35"></a></span>
+<span id="cb9-36"><a href="#cb9-36"></a><span class="co">#Now we try SA2008 function with a different optimality criterion</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb9-38"><a href="#cb9-38"></a>trySA2008=<span class="kw">SA2008</span>(<span class="dt">n=</span><span class="dv">6</span>,<span class="dt">k=</span><span class="dv">3</span>,<span class="dt">OC=</span><span class="st">&quot;AvgAbsCor&quot;</span>)</span>
+<span id="cb9-39"><a href="#cb9-39"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0.08 seconds&quot;</span></span>
+<span id="cb9-40"><a href="#cb9-40"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
+<span id="cb9-41"><a href="#cb9-41"></a><span class="co">#&gt; [1] &quot;the elements in design matrix is scaled to be 1 to 6&quot;</span></span>
+<span id="cb9-42"><a href="#cb9-42"></a><span class="kw">AvgAbsCor</span>(trySA2008)      <span class="co">#The average absolute correlation is about 0.03</span></span>
+<span id="cb9-43"><a href="#cb9-43"></a><span class="co">#&gt; [1] 0.02857143</span></span></code></pre></div>
 <p>Ba, Myers and Brenneman (2015) extended the idea of Sliced Latin Hypercube Designs (SLHD) from Qian (2012) and had their own modifications of SA from Morris and Mitchell (1995). They called their algorithm “improved two-stage algorithm”. Our function “SLHD” implements their algorithm. See the following code and example.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb10-2"><a href="#cb10-2"></a>trySLHD_63F=<span class="kw">SLHD</span>(<span class="dt">n=</span><span class="dv">6</span>,<span class="dt">k=</span><span class="dv">3</span>,<span class="dt">t=</span><span class="dv">2</span>)   <span class="co">#The default setting (stage2 is FALSE)</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; ======== 10% completed for Stage I.  The maximum CPU time is 300 seconds================ 20% completed for Stage I.  The maximum CPU time is 300 seconds======================== 30% completed for Stage I.  The maximum CPU time is 300 seconds================================ 40% completed for Stage I.  The maximum CPU time is 300 seconds======================================== 50% completed for Stage I.  The maximum CPU time is 300 seconds================================================ 60% completed for Stage I.  The maximum CPU time is 300 seconds======================================================== 70% completed for Stage I.  The maximum CPU time is 300 seconds================================================================ 80% completed for Stage I.  The maximum CPU time is 300 seconds======================================================================== 90% completed for Stage I.  The maximum CPU time is 300 seconds================================================================================ 100% completed for Stage I.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration for Stage I is: 0.02 seconds&quot;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; ======== 10% completed for Stage I.  The maximum CPU time is 300 seconds================ 20% completed for Stage I.  The maximum CPU time is 300 seconds======================== 30% completed for Stage I.  The maximum CPU time is 300 seconds================================ 40% completed for Stage I.  The maximum CPU time is 300 seconds======================================== 50% completed for Stage I.  The maximum CPU time is 300 seconds================================================ 60% completed for Stage I.  The maximum CPU time is 300 seconds======================================================== 70% completed for Stage I.  The maximum CPU time is 300 seconds================================================================ 80% completed for Stage I.  The maximum CPU time is 300 seconds======================================================================== 90% completed for Stage I.  The maximum CPU time is 300 seconds================================================================================ 100% completed for Stage I.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration for Stage I is: 0.01 seconds&quot;</span></span>
 <span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt; [1] &quot;the number of iterations completed for Stage I is: 10&quot;</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a>trySLHD_63F</span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt; [1,]    6    4    5</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt; [2,]    1    2    4</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt; [3,]    3    5    2</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#&gt; [4,]    4    3    3</span></span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt; [5,]    2    6    6</span></span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt; [6,]    5    1    1</span></span>
-<span id="cb10-13"><a href="#cb10-13"></a><span class="kw">phi_p</span>(<span class="dt">X=</span>trySLHD_63F,<span class="dt">p=</span><span class="dv">15</span>) </span>
-<span id="cb10-14"><a href="#cb10-14"></a><span class="co">#&gt; [1] 0.2517316</span></span>
-<span id="cb10-15"><a href="#cb10-15"></a></span>
-<span id="cb10-16"><a href="#cb10-16"></a><span class="co">#If the second stage is desired, run the following</span></span>
-<span id="cb10-17"><a href="#cb10-17"></a>trySLHD_63T=<span class="kw">SLHD</span>(<span class="dt">n=</span><span class="dv">6</span>,<span class="dt">k=</span><span class="dv">3</span>,<span class="dt">t=</span><span class="dv">2</span>,<span class="dt">stage2=</span><span class="ot">TRUE</span>)</span>
-<span id="cb10-18"><a href="#cb10-18"></a><span class="co">#&gt; ======== 10% completed for Stage I.  The maximum CPU time is 300 seconds================ 20% completed for Stage I.  The maximum CPU time is 300 seconds======================== 30% completed for Stage I.  The maximum CPU time is 300 seconds================================ 40% completed for Stage I.  The maximum CPU time is 300 seconds======================================== 50% completed for Stage I.  The maximum CPU time is 300 seconds================================================ 60% completed for Stage I.  The maximum CPU time is 300 seconds======================================================== 70% completed for Stage I.  The maximum CPU time is 300 seconds================================================================ 80% completed for Stage I.  The maximum CPU time is 300 seconds======================================================================== 90% completed for Stage I.  The maximum CPU time is 300 seconds================================================================================ 100% completed for Stage I.  The maximum CPU time is 300 seconds======== 10% completed for Stage II.  The maximum CPU time is 300 seconds================ 20% completed for Stage II.  The maximum CPU time is 300 seconds======================== 30% completed for Stage II.  The maximum CPU time is 300 seconds================================ 40% completed for Stage II.  The maximum CPU time is 300 seconds======================================== 50% completed for Stage II.  The maximum CPU time is 300 seconds================================================ 60% completed for Stage II.  The maximum CPU time is 300 seconds======================================================== 70% completed for Stage II.  The maximum CPU time is 300 seconds================================================================ 80% completed for Stage II.  The maximum CPU time is 300 seconds======================================================================== 90% completed for Stage II.  The maximum CPU time is 300 seconds================================================================================ 100% completed for Stage II.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration for Stage I is: 0.01 seconds&quot;</span></span>
-<span id="cb10-19"><a href="#cb10-19"></a><span class="co">#&gt; [1] &quot;average CPU time per iteration for Stage II is: 0.03 seconds&quot;</span></span>
-<span id="cb10-20"><a href="#cb10-20"></a><span class="co">#&gt; [1] &quot;the number of iterations completed for Stage I is: 10&quot;</span></span>
-<span id="cb10-21"><a href="#cb10-21"></a><span class="co">#&gt; [1] &quot;the number of iterations completed for Stage II is: 10&quot;</span></span>
-<span id="cb10-22"><a href="#cb10-22"></a>trySLHD_63T</span>
-<span id="cb10-23"><a href="#cb10-23"></a><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
-<span id="cb10-24"><a href="#cb10-24"></a><span class="co">#&gt; [1,]    5    1    2</span></span>
-<span id="cb10-25"><a href="#cb10-25"></a><span class="co">#&gt; [2,]    4    4    4</span></span>
-<span id="cb10-26"><a href="#cb10-26"></a><span class="co">#&gt; [3,]    2    6    5</span></span>
-<span id="cb10-27"><a href="#cb10-27"></a><span class="co">#&gt; [4,]    3    5    1</span></span>
-<span id="cb10-28"><a href="#cb10-28"></a><span class="co">#&gt; [5,]    1    2    3</span></span>
-<span id="cb10-29"><a href="#cb10-29"></a><span class="co">#&gt; [6,]    6    3    6</span></span>
-<span id="cb10-30"><a href="#cb10-30"></a><span class="kw">phi_p</span>(<span class="dt">X=</span>trySLHD_63T,<span class="dt">p=</span><span class="dv">15</span>)       <span class="co">#Result is improved (phi_p is smaller than above)</span></span>
-<span id="cb10-31"><a href="#cb10-31"></a><span class="co">#&gt; [1] 0.21651</span></span>
-<span id="cb10-32"><a href="#cb10-32"></a></span>
-<span id="cb10-33"><a href="#cb10-33"></a><span class="co">#Now we try SLHD function with a different optimality criterion</span></span>
-<span id="cb10-34"><a href="#cb10-34"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb10-35"><a href="#cb10-35"></a>trySLHD=<span class="kw">SLHD</span>(<span class="dt">n=</span><span class="dv">6</span>,<span class="dt">k=</span><span class="dv">3</span>,<span class="dt">OC=</span><span class="st">&quot;AvgAbsCor&quot;</span>,<span class="dt">stage2=</span><span class="ot">TRUE</span>)</span>
-<span id="cb10-36"><a href="#cb10-36"></a><span class="co">#&gt; ======== 10% completed for Stage I.  The maximum CPU time is 300 seconds================ 20% completed for Stage I.  The maximum CPU time is 300 seconds======================== 30% completed for Stage I.  The maximum CPU time is 300 seconds================================ 40% completed for Stage I.  The maximum CPU time is 300 seconds======================================== 50% completed for Stage I.  The maximum CPU time is 300 seconds================================================ 60% completed for Stage I.  The maximum CPU time is 300 seconds======================================================== 70% completed for Stage I.  The maximum CPU time is 300 seconds================================================================ 80% completed for Stage I.  The maximum CPU time is 300 seconds======================================================================== 90% completed for Stage I.  The maximum CPU time is 300 seconds================================================================================ 100% completed for Stage I.  The maximum CPU time is 300 seconds======== 10% completed for Stage II.  The maximum CPU time is 300 seconds================ 20% completed for Stage II.  The maximum CPU time is 300 seconds======================== 30% completed for Stage II.  The maximum CPU time is 300 seconds================================ 40% completed for Stage II.  The maximum CPU time is 300 seconds======================================== 50% completed for Stage II.  The maximum CPU time is 300 seconds================================================ 60% completed for Stage II.  The maximum CPU time is 300 seconds======================================================== 70% completed for Stage II.  The maximum CPU time is 300 seconds================================================================ 80% completed for Stage II.  The maximum CPU time is 300 seconds======================================================================== 90% completed for Stage II.  The maximum CPU time is 300 seconds================================================================================ 100% completed for Stage II.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration for Stage I is: 0.02 seconds&quot;</span></span>
-<span id="cb10-37"><a href="#cb10-37"></a><span class="co">#&gt; [1] &quot;average CPU time per iteration for Stage II is: 0.04 seconds&quot;</span></span>
-<span id="cb10-38"><a href="#cb10-38"></a><span class="co">#&gt; [1] &quot;the number of iterations completed for Stage I is: 10&quot;</span></span>
-<span id="cb10-39"><a href="#cb10-39"></a><span class="co">#&gt; [1] &quot;the number of iterations completed for Stage II is: 10&quot;</span></span>
-<span id="cb10-40"><a href="#cb10-40"></a><span class="kw">AvgAbsCor</span>(trySLHD)      <span class="co">#The average absolute correlation is about 0.07</span></span>
-<span id="cb10-41"><a href="#cb10-41"></a><span class="co">#&gt; [1] 0.04761905</span></span></code></pre></div>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt; [1] &quot;the elements in design matrix is scaled to be 1 to 6&quot;</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>trySLHD_63F</span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt; [1,]    6    4    5</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt; [2,]    1    2    4</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#&gt; [3,]    3    5    2</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt; [4,]    4    3    3</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt; [5,]    2    6    6</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="co">#&gt; [6,]    5    1    1</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="kw">phi_p</span>(<span class="dt">X=</span>trySLHD_63F,<span class="dt">p=</span><span class="dv">15</span>) </span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="co">#&gt; [1] 0.2517316</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="co">#If the second stage is desired, run the following</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a>trySLHD_63T=<span class="kw">SLHD</span>(<span class="dt">n=</span><span class="dv">6</span>,<span class="dt">k=</span><span class="dv">3</span>,<span class="dt">t=</span><span class="dv">2</span>,<span class="dt">stage2=</span><span class="ot">TRUE</span>)</span>
+<span id="cb10-19"><a href="#cb10-19"></a><span class="co">#&gt; ======== 10% completed for Stage I.  The maximum CPU time is 300 seconds================ 20% completed for Stage I.  The maximum CPU time is 300 seconds======================== 30% completed for Stage I.  The maximum CPU time is 300 seconds================================ 40% completed for Stage I.  The maximum CPU time is 300 seconds======================================== 50% completed for Stage I.  The maximum CPU time is 300 seconds================================================ 60% completed for Stage I.  The maximum CPU time is 300 seconds======================================================== 70% completed for Stage I.  The maximum CPU time is 300 seconds================================================================ 80% completed for Stage I.  The maximum CPU time is 300 seconds======================================================================== 90% completed for Stage I.  The maximum CPU time is 300 seconds================================================================================ 100% completed for Stage I.  The maximum CPU time is 300 seconds======== 10% completed for Stage II.  The maximum CPU time is 300 seconds================ 20% completed for Stage II.  The maximum CPU time is 300 seconds======================== 30% completed for Stage II.  The maximum CPU time is 300 seconds================================ 40% completed for Stage II.  The maximum CPU time is 300 seconds======================================== 50% completed for Stage II.  The maximum CPU time is 300 seconds================================================ 60% completed for Stage II.  The maximum CPU time is 300 seconds======================================================== 70% completed for Stage II.  The maximum CPU time is 300 seconds================================================================ 80% completed for Stage II.  The maximum CPU time is 300 seconds======================================================================== 90% completed for Stage II.  The maximum CPU time is 300 seconds================================================================================ 100% completed for Stage II.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration for Stage I is: 0.01 seconds&quot;</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a><span class="co">#&gt; [1] &quot;average CPU time per iteration for Stage II is: 0.02 seconds&quot;</span></span>
+<span id="cb10-21"><a href="#cb10-21"></a><span class="co">#&gt; [1] &quot;the number of iterations completed for Stage I is: 10&quot;</span></span>
+<span id="cb10-22"><a href="#cb10-22"></a><span class="co">#&gt; [1] &quot;the number of iterations completed for Stage II is: 10&quot;</span></span>
+<span id="cb10-23"><a href="#cb10-23"></a><span class="co">#&gt; [1] &quot;the elements in design matrix is scaled to be 1 to 6&quot;</span></span>
+<span id="cb10-24"><a href="#cb10-24"></a>trySLHD_63T</span>
+<span id="cb10-25"><a href="#cb10-25"></a><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
+<span id="cb10-26"><a href="#cb10-26"></a><span class="co">#&gt; [1,]    5    1    2</span></span>
+<span id="cb10-27"><a href="#cb10-27"></a><span class="co">#&gt; [2,]    4    4    4</span></span>
+<span id="cb10-28"><a href="#cb10-28"></a><span class="co">#&gt; [3,]    2    6    5</span></span>
+<span id="cb10-29"><a href="#cb10-29"></a><span class="co">#&gt; [4,]    3    5    1</span></span>
+<span id="cb10-30"><a href="#cb10-30"></a><span class="co">#&gt; [5,]    1    2    3</span></span>
+<span id="cb10-31"><a href="#cb10-31"></a><span class="co">#&gt; [6,]    6    3    6</span></span>
+<span id="cb10-32"><a href="#cb10-32"></a><span class="kw">phi_p</span>(<span class="dt">X=</span>trySLHD_63T,<span class="dt">p=</span><span class="dv">15</span>)       <span class="co">#Result is improved (phi_p is smaller than above)</span></span>
+<span id="cb10-33"><a href="#cb10-33"></a><span class="co">#&gt; [1] 0.21651</span></span>
+<span id="cb10-34"><a href="#cb10-34"></a></span>
+<span id="cb10-35"><a href="#cb10-35"></a><span class="co">#Now we try SLHD function with a different optimality criterion</span></span>
+<span id="cb10-36"><a href="#cb10-36"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb10-37"><a href="#cb10-37"></a>trySLHD=<span class="kw">SLHD</span>(<span class="dt">n=</span><span class="dv">6</span>,<span class="dt">k=</span><span class="dv">3</span>,<span class="dt">OC=</span><span class="st">&quot;AvgAbsCor&quot;</span>,<span class="dt">stage2=</span><span class="ot">TRUE</span>)</span>
+<span id="cb10-38"><a href="#cb10-38"></a><span class="co">#&gt; ======== 10% completed for Stage I.  The maximum CPU time is 300 seconds================ 20% completed for Stage I.  The maximum CPU time is 300 seconds======================== 30% completed for Stage I.  The maximum CPU time is 300 seconds================================ 40% completed for Stage I.  The maximum CPU time is 300 seconds======================================== 50% completed for Stage I.  The maximum CPU time is 300 seconds================================================ 60% completed for Stage I.  The maximum CPU time is 300 seconds======================================================== 70% completed for Stage I.  The maximum CPU time is 300 seconds================================================================ 80% completed for Stage I.  The maximum CPU time is 300 seconds======================================================================== 90% completed for Stage I.  The maximum CPU time is 300 seconds================================================================================ 100% completed for Stage I.  The maximum CPU time is 300 seconds======== 10% completed for Stage II.  The maximum CPU time is 300 seconds================ 20% completed for Stage II.  The maximum CPU time is 300 seconds======================== 30% completed for Stage II.  The maximum CPU time is 300 seconds================================ 40% completed for Stage II.  The maximum CPU time is 300 seconds======================================== 50% completed for Stage II.  The maximum CPU time is 300 seconds================================================ 60% completed for Stage II.  The maximum CPU time is 300 seconds======================================================== 70% completed for Stage II.  The maximum CPU time is 300 seconds================================================================ 80% completed for Stage II.  The maximum CPU time is 300 seconds======================================================================== 90% completed for Stage II.  The maximum CPU time is 300 seconds================================================================================ 100% completed for Stage II.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration for Stage I is: 0.01 seconds&quot;</span></span>
+<span id="cb10-39"><a href="#cb10-39"></a><span class="co">#&gt; [1] &quot;average CPU time per iteration for Stage II is: 0.02 seconds&quot;</span></span>
+<span id="cb10-40"><a href="#cb10-40"></a><span class="co">#&gt; [1] &quot;the number of iterations completed for Stage I is: 10&quot;</span></span>
+<span id="cb10-41"><a href="#cb10-41"></a><span class="co">#&gt; [1] &quot;the number of iterations completed for Stage II is: 10&quot;</span></span>
+<span id="cb10-42"><a href="#cb10-42"></a><span class="co">#&gt; [1] &quot;the elements in design matrix is scaled to be 1 to 6&quot;</span></span>
+<span id="cb10-43"><a href="#cb10-43"></a><span class="kw">AvgAbsCor</span>(trySLHD)      <span class="co">#The average absolute correlation is about 0.07</span></span>
+<span id="cb10-44"><a href="#cb10-44"></a><span class="co">#&gt; [1] 0.04761905</span></span></code></pre></div>
 <p>Chen et al. (2013) followed the structure of Particle Swarm Optimization (PSO) framework and proposed a version of it for constructing maximin distance LHDs, and their algorithm is called LaPSO. Our function “LaPSO” implements their algorithm. See the following code and example.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb11-2"><a href="#cb11-2"></a>tryLaPSO_<span class="dv">63</span>=<span class="kw">LaPSO</span>(<span class="dt">n=</span><span class="dv">6</span>,<span class="dt">k=</span><span class="dv">3</span>)</span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0.01 seconds&quot;</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0 seconds&quot;</span></span>
 <span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a>tryLaPSO_<span class="dv">63</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt; [1,]    1    5    4</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt; [2,]    5    6    1</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="co">#&gt; [3,]    6    2    3</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a><span class="co">#&gt; [4,]    4    4    6</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a><span class="co">#&gt; [5,]    3    3    2</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a><span class="co">#&gt; [6,]    2    1    5</span></span>
-<span id="cb11-13"><a href="#cb11-13"></a><span class="kw">phi_p</span>(<span class="dt">X=</span>tryLaPSO_<span class="dv">63</span>,<span class="dt">p=</span><span class="dv">15</span>) </span>
-<span id="cb11-14"><a href="#cb11-14"></a><span class="co">#&gt; [1] 0.2052545</span></span>
-<span id="cb11-15"><a href="#cb11-15"></a></span>
-<span id="cb11-16"><a href="#cb11-16"></a><span class="co">#Another example with different n and k</span></span>
-<span id="cb11-17"><a href="#cb11-17"></a>tryLaPSO_<span class="dv">92</span>=<span class="kw">LaPSO</span>(<span class="dt">n=</span><span class="dv">9</span>,<span class="dt">k=</span><span class="dv">2</span>)</span>
-<span id="cb11-18"><a href="#cb11-18"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0.01 seconds&quot;</span></span>
-<span id="cb11-19"><a href="#cb11-19"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
-<span id="cb11-20"><a href="#cb11-20"></a>tryLaPSO_<span class="dv">92</span></span>
-<span id="cb11-21"><a href="#cb11-21"></a><span class="co">#&gt;       [,1] [,2]</span></span>
-<span id="cb11-22"><a href="#cb11-22"></a><span class="co">#&gt;  [1,]    1    9</span></span>
-<span id="cb11-23"><a href="#cb11-23"></a><span class="co">#&gt;  [2,]    7    8</span></span>
-<span id="cb11-24"><a href="#cb11-24"></a><span class="co">#&gt;  [3,]    2    2</span></span>
-<span id="cb11-25"><a href="#cb11-25"></a><span class="co">#&gt;  [4,]    9    6</span></span>
-<span id="cb11-26"><a href="#cb11-26"></a><span class="co">#&gt;  [5,]    6    5</span></span>
-<span id="cb11-27"><a href="#cb11-27"></a><span class="co">#&gt;  [6,]    5    1</span></span>
-<span id="cb11-28"><a href="#cb11-28"></a><span class="co">#&gt;  [7,]    4    7</span></span>
-<span id="cb11-29"><a href="#cb11-29"></a><span class="co">#&gt;  [8,]    3    4</span></span>
-<span id="cb11-30"><a href="#cb11-30"></a><span class="co">#&gt;  [9,]    8    3</span></span>
-<span id="cb11-31"><a href="#cb11-31"></a><span class="kw">phi_p</span>(<span class="dt">X=</span>tryLaPSO_<span class="dv">92</span>,<span class="dt">p=</span><span class="dv">15</span>) </span>
-<span id="cb11-32"><a href="#cb11-32"></a><span class="co">#&gt; [1] 0.3361717</span></span>
-<span id="cb11-33"><a href="#cb11-33"></a></span>
-<span id="cb11-34"><a href="#cb11-34"></a><span class="co">#Now we try LaPSO function with a different optimality criterion</span></span>
-<span id="cb11-35"><a href="#cb11-35"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb11-36"><a href="#cb11-36"></a>tryLaPSO=<span class="kw">LaPSO</span>(<span class="dt">n=</span><span class="dv">6</span>,<span class="dt">k=</span><span class="dv">3</span>,<span class="dt">OC=</span><span class="st">&quot;AvgAbsCor&quot;</span>)</span>
-<span id="cb11-37"><a href="#cb11-37"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0.01 seconds&quot;</span></span>
-<span id="cb11-38"><a href="#cb11-38"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
-<span id="cb11-39"><a href="#cb11-39"></a><span class="kw">AvgAbsCor</span>(tryLaPSO)      <span class="co">#The average absolute correlation is about 0.1</span></span>
-<span id="cb11-40"><a href="#cb11-40"></a><span class="co">#&gt; [1] 0.1047619</span></span></code></pre></div>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt; [1] &quot;the elements in design matrix is scaled to be 1 to 6&quot;</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>tryLaPSO_<span class="dv">63</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt; [1,]    1    5    4</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="co">#&gt; [2,]    5    6    1</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="co">#&gt; [3,]    6    2    3</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="co">#&gt; [4,]    4    4    6</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="co">#&gt; [5,]    3    3    2</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="co">#&gt; [6,]    2    1    5</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a><span class="kw">phi_p</span>(<span class="dt">X=</span>tryLaPSO_<span class="dv">63</span>,<span class="dt">p=</span><span class="dv">15</span>) </span>
+<span id="cb11-15"><a href="#cb11-15"></a><span class="co">#&gt; [1] 0.2052545</span></span>
+<span id="cb11-16"><a href="#cb11-16"></a></span>
+<span id="cb11-17"><a href="#cb11-17"></a><span class="co">#Another example with different n and k</span></span>
+<span id="cb11-18"><a href="#cb11-18"></a>tryLaPSO_<span class="dv">92</span>=<span class="kw">LaPSO</span>(<span class="dt">n=</span><span class="dv">9</span>,<span class="dt">k=</span><span class="dv">2</span>)</span>
+<span id="cb11-19"><a href="#cb11-19"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0.01 seconds&quot;</span></span>
+<span id="cb11-20"><a href="#cb11-20"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
+<span id="cb11-21"><a href="#cb11-21"></a><span class="co">#&gt; [1] &quot;the elements in design matrix is scaled to be 1 to 9&quot;</span></span>
+<span id="cb11-22"><a href="#cb11-22"></a>tryLaPSO_<span class="dv">92</span></span>
+<span id="cb11-23"><a href="#cb11-23"></a><span class="co">#&gt;       [,1] [,2]</span></span>
+<span id="cb11-24"><a href="#cb11-24"></a><span class="co">#&gt;  [1,]    1    9</span></span>
+<span id="cb11-25"><a href="#cb11-25"></a><span class="co">#&gt;  [2,]    7    8</span></span>
+<span id="cb11-26"><a href="#cb11-26"></a><span class="co">#&gt;  [3,]    2    2</span></span>
+<span id="cb11-27"><a href="#cb11-27"></a><span class="co">#&gt;  [4,]    9    6</span></span>
+<span id="cb11-28"><a href="#cb11-28"></a><span class="co">#&gt;  [5,]    6    5</span></span>
+<span id="cb11-29"><a href="#cb11-29"></a><span class="co">#&gt;  [6,]    5    1</span></span>
+<span id="cb11-30"><a href="#cb11-30"></a><span class="co">#&gt;  [7,]    4    7</span></span>
+<span id="cb11-31"><a href="#cb11-31"></a><span class="co">#&gt;  [8,]    3    4</span></span>
+<span id="cb11-32"><a href="#cb11-32"></a><span class="co">#&gt;  [9,]    8    3</span></span>
+<span id="cb11-33"><a href="#cb11-33"></a><span class="kw">phi_p</span>(<span class="dt">X=</span>tryLaPSO_<span class="dv">92</span>,<span class="dt">p=</span><span class="dv">15</span>) </span>
+<span id="cb11-34"><a href="#cb11-34"></a><span class="co">#&gt; [1] 0.3361717</span></span>
+<span id="cb11-35"><a href="#cb11-35"></a></span>
+<span id="cb11-36"><a href="#cb11-36"></a><span class="co">#Now we try LaPSO function with a different optimality criterion</span></span>
+<span id="cb11-37"><a href="#cb11-37"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb11-38"><a href="#cb11-38"></a>tryLaPSO=<span class="kw">LaPSO</span>(<span class="dt">n=</span><span class="dv">6</span>,<span class="dt">k=</span><span class="dv">3</span>,<span class="dt">OC=</span><span class="st">&quot;AvgAbsCor&quot;</span>)</span>
+<span id="cb11-39"><a href="#cb11-39"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0 seconds&quot;</span></span>
+<span id="cb11-40"><a href="#cb11-40"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
+<span id="cb11-41"><a href="#cb11-41"></a><span class="co">#&gt; [1] &quot;the elements in design matrix is scaled to be 1 to 6&quot;</span></span>
+<span id="cb11-42"><a href="#cb11-42"></a><span class="kw">AvgAbsCor</span>(tryLaPSO)      <span class="co">#The average absolute correlation is about 0.1</span></span>
+<span id="cb11-43"><a href="#cb11-43"></a><span class="co">#&gt; [1] 0.1047619</span></span></code></pre></div>
 <p>Liefvendahl and Stocki (2006) proposed a version of the genetic algorithm (GA) which implemented an elite strategy to focus on the global best directly for constructing maximin distance LHDs. Our function “GA” implements their algorithm. See the following code and example.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb12-2"><a href="#cb12-2"></a>tryGA_<span class="dv">63</span>=<span class="kw">GA</span>(<span class="dt">n=</span><span class="dv">6</span>,<span class="dt">k=</span><span class="dv">3</span>)</span>
 <span id="cb12-3"><a href="#cb12-3"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0 seconds&quot;</span></span>
 <span id="cb12-4"><a href="#cb12-4"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>tryGA_<span class="dv">63</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="co">#&gt; [1,]    2    5    6</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="co">#&gt; [2,]    5    3    1</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="co">#&gt; [3,]    3    6    2</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a><span class="co">#&gt; [4,]    6    4    4</span></span>
-<span id="cb12-11"><a href="#cb12-11"></a><span class="co">#&gt; [5,]    4    1    5</span></span>
-<span id="cb12-12"><a href="#cb12-12"></a><span class="co">#&gt; [6,]    1    2    3</span></span>
-<span id="cb12-13"><a href="#cb12-13"></a><span class="kw">phi_p</span>(<span class="dt">X=</span>tryGA_<span class="dv">63</span>,<span class="dt">p=</span><span class="dv">15</span>) </span>
-<span id="cb12-14"><a href="#cb12-14"></a><span class="co">#&gt; [1] 0.203588</span></span>
-<span id="cb12-15"><a href="#cb12-15"></a></span>
-<span id="cb12-16"><a href="#cb12-16"></a><span class="co">#Another example with different n and k.</span></span>
-<span id="cb12-17"><a href="#cb12-17"></a>tryGA_<span class="dv">92</span>=<span class="kw">GA</span>(<span class="dt">n=</span><span class="dv">9</span>,<span class="dt">k=</span><span class="dv">2</span>)</span>
-<span id="cb12-18"><a href="#cb12-18"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0 seconds&quot;</span></span>
-<span id="cb12-19"><a href="#cb12-19"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
-<span id="cb12-20"><a href="#cb12-20"></a>tryGA_<span class="dv">92</span></span>
-<span id="cb12-21"><a href="#cb12-21"></a><span class="co">#&gt;       [,1] [,2]</span></span>
-<span id="cb12-22"><a href="#cb12-22"></a><span class="co">#&gt;  [1,]    8    6</span></span>
-<span id="cb12-23"><a href="#cb12-23"></a><span class="co">#&gt;  [2,]    2    1</span></span>
-<span id="cb12-24"><a href="#cb12-24"></a><span class="co">#&gt;  [3,]    3    7</span></span>
-<span id="cb12-25"><a href="#cb12-25"></a><span class="co">#&gt;  [4,]    5    9</span></span>
-<span id="cb12-26"><a href="#cb12-26"></a><span class="co">#&gt;  [5,]    6    5</span></span>
-<span id="cb12-27"><a href="#cb12-27"></a><span class="co">#&gt;  [6,]    1    4</span></span>
-<span id="cb12-28"><a href="#cb12-28"></a><span class="co">#&gt;  [7,]    4    3</span></span>
-<span id="cb12-29"><a href="#cb12-29"></a><span class="co">#&gt;  [8,]    7    2</span></span>
-<span id="cb12-30"><a href="#cb12-30"></a><span class="co">#&gt;  [9,]    9    8</span></span>
-<span id="cb12-31"><a href="#cb12-31"></a><span class="kw">phi_p</span>(<span class="dt">X=</span>tryGA_<span class="dv">92</span>,<span class="dt">p=</span><span class="dv">15</span>) </span>
-<span id="cb12-32"><a href="#cb12-32"></a><span class="co">#&gt; [1] 0.3501968</span></span>
-<span id="cb12-33"><a href="#cb12-33"></a></span>
-<span id="cb12-34"><a href="#cb12-34"></a><span class="co">#Now we try GA function with a different optimality criterion</span></span>
-<span id="cb12-35"><a href="#cb12-35"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb12-36"><a href="#cb12-36"></a>tryGA=<span class="kw">GA</span>(<span class="dt">n=</span><span class="dv">6</span>,<span class="dt">k=</span><span class="dv">3</span>,<span class="dt">OC=</span><span class="st">&quot;AvgAbsCor&quot;</span>)</span>
-<span id="cb12-37"><a href="#cb12-37"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0 seconds&quot;</span></span>
-<span id="cb12-38"><a href="#cb12-38"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
-<span id="cb12-39"><a href="#cb12-39"></a><span class="kw">AvgAbsCor</span>(tryGA)      <span class="co">#The average absolute correlation is about 0.07</span></span>
-<span id="cb12-40"><a href="#cb12-40"></a><span class="co">#&gt; [1] 0.06666667</span></span></code></pre></div>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co">#&gt; [1] &quot;the elements in design matrix is scaled to be 1 to 6&quot;</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>tryGA_<span class="dv">63</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="co">#&gt; [1,]    2    5    6</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="co">#&gt; [2,]    5    3    1</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="co">#&gt; [3,]    3    6    2</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="co">#&gt; [4,]    6    4    4</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="co">#&gt; [5,]    4    1    5</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="co">#&gt; [6,]    1    2    3</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="kw">phi_p</span>(<span class="dt">X=</span>tryGA_<span class="dv">63</span>,<span class="dt">p=</span><span class="dv">15</span>) </span>
+<span id="cb12-15"><a href="#cb12-15"></a><span class="co">#&gt; [1] 0.203588</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a></span>
+<span id="cb12-17"><a href="#cb12-17"></a><span class="co">#Another example with different n and k.</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a>tryGA_<span class="dv">92</span>=<span class="kw">GA</span>(<span class="dt">n=</span><span class="dv">9</span>,<span class="dt">k=</span><span class="dv">2</span>)</span>
+<span id="cb12-19"><a href="#cb12-19"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0 seconds&quot;</span></span>
+<span id="cb12-20"><a href="#cb12-20"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
+<span id="cb12-21"><a href="#cb12-21"></a><span class="co">#&gt; [1] &quot;the elements in design matrix is scaled to be 1 to 9&quot;</span></span>
+<span id="cb12-22"><a href="#cb12-22"></a>tryGA_<span class="dv">92</span></span>
+<span id="cb12-23"><a href="#cb12-23"></a><span class="co">#&gt;       [,1] [,2]</span></span>
+<span id="cb12-24"><a href="#cb12-24"></a><span class="co">#&gt;  [1,]    8    6</span></span>
+<span id="cb12-25"><a href="#cb12-25"></a><span class="co">#&gt;  [2,]    2    1</span></span>
+<span id="cb12-26"><a href="#cb12-26"></a><span class="co">#&gt;  [3,]    3    7</span></span>
+<span id="cb12-27"><a href="#cb12-27"></a><span class="co">#&gt;  [4,]    5    9</span></span>
+<span id="cb12-28"><a href="#cb12-28"></a><span class="co">#&gt;  [5,]    6    5</span></span>
+<span id="cb12-29"><a href="#cb12-29"></a><span class="co">#&gt;  [6,]    1    4</span></span>
+<span id="cb12-30"><a href="#cb12-30"></a><span class="co">#&gt;  [7,]    4    3</span></span>
+<span id="cb12-31"><a href="#cb12-31"></a><span class="co">#&gt;  [8,]    7    2</span></span>
+<span id="cb12-32"><a href="#cb12-32"></a><span class="co">#&gt;  [9,]    9    8</span></span>
+<span id="cb12-33"><a href="#cb12-33"></a><span class="kw">phi_p</span>(<span class="dt">X=</span>tryGA_<span class="dv">92</span>,<span class="dt">p=</span><span class="dv">15</span>) </span>
+<span id="cb12-34"><a href="#cb12-34"></a><span class="co">#&gt; [1] 0.3501968</span></span>
+<span id="cb12-35"><a href="#cb12-35"></a></span>
+<span id="cb12-36"><a href="#cb12-36"></a><span class="co">#Now we try GA function with a different optimality criterion</span></span>
+<span id="cb12-37"><a href="#cb12-37"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb12-38"><a href="#cb12-38"></a>tryGA=<span class="kw">GA</span>(<span class="dt">n=</span><span class="dv">6</span>,<span class="dt">k=</span><span class="dv">3</span>,<span class="dt">OC=</span><span class="st">&quot;AvgAbsCor&quot;</span>)</span>
+<span id="cb12-39"><a href="#cb12-39"></a><span class="co">#&gt; ======== 10% completed.  The maximum CPU time is 300 seconds================ 20% completed.  The maximum CPU time is 300 seconds======================== 30% completed.  The maximum CPU time is 300 seconds================================ 40% completed.  The maximum CPU time is 300 seconds======================================== 50% completed.  The maximum CPU time is 300 seconds================================================ 60% completed.  The maximum CPU time is 300 seconds======================================================== 70% completed.  The maximum CPU time is 300 seconds================================================================ 80% completed.  The maximum CPU time is 300 seconds======================================================================== 90% completed.  The maximum CPU time is 300 seconds================================================================================ 100% completed.  The maximum CPU time is 300 seconds[1] &quot;average CPU time per iteration is: 0 seconds&quot;</span></span>
+<span id="cb12-40"><a href="#cb12-40"></a><span class="co">#&gt; [1] &quot;the number of iterations completed is: 10&quot;</span></span>
+<span id="cb12-41"><a href="#cb12-41"></a><span class="co">#&gt; [1] &quot;the elements in design matrix is scaled to be 1 to 6&quot;</span></span>
+<span id="cb12-42"><a href="#cb12-42"></a><span class="kw">AvgAbsCor</span>(tryGA)      <span class="co">#The average absolute correlation is about 0.07</span></span>
+<span id="cb12-43"><a href="#cb12-43"></a><span class="co">#&gt; [1] 0.06666667</span></span></code></pre></div>
 <p>In addition to above algorithms, Wang, L., Xiao, Q., and Xu, H. (2018) proposed a construction method for maximin <span class="math inline">\(L_1\)</span> distance LHDs based on good lattice point designs. One big advantage is that their method gives instant solutions, and this is very helpful for practitioners who seek immediate results. See the following code and example.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">#n by n design when 2n+1 is prime</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a>try=<span class="kw">FastMmLHD</span>(<span class="dv">8</span>,<span class="dv">8</span>)</span>
@@ -773,9 +790,9 @@ ave(|q|) = \frac{2 \sum_{i=1}^{k-1} \sum_{j=i+1}^{k}|q_{ij}|}{k(k-1)}, \, \, max
 <span id="cb13-76"><a href="#cb13-76"></a><span class="co">#&gt; [24,]    2    2    2    2    2    2    2    2</span></span>
 <span id="cb13-77"><a href="#cb13-77"></a><span class="kw">phi_p</span>(try4)   <span class="co">#calculate the phi_p of &quot;try4&quot;.</span></span>
 <span id="cb13-78"><a href="#cb13-78"></a><span class="co">#&gt; [1] 0.03314641</span></span></code></pre></div>
-<p>Besides maximin distance LHDs, orthogonal Latin hypercube designs (OLHDs) are popular as well. Ye (1998) proposed a contruction method for generating OHLDs. Our function “OLHD1998” implements this method. See the following code and example.</p>
+<p>Besides maximin distance LHDs, orthogonal Latin hypercube designs (OLHDs) are popular as well. Ye (1998) proposed a construction method for generating OHLDs. Our function “OLHD.Y1998” implements this method. See the following code and example.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co">#create an orthogonal LHD with m=4. So n=2^m+1=17 and k=2*m-2=6</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>tryOLHD=<span class="kw">OLHD1998</span>(<span class="dt">m=</span><span class="dv">4</span>)</span>
+<span id="cb14-2"><a href="#cb14-2"></a>tryOLHD=<span class="kw">OLHD.Y1998</span>(<span class="dt">m=</span><span class="dv">4</span>)</span>
 <span id="cb14-3"><a href="#cb14-3"></a>tryOLHD</span>
 <span id="cb14-4"><a href="#cb14-4"></a><span class="co">#&gt;       [,1] [,2] [,3] [,4] [,5] [,6]</span></span>
 <span id="cb14-5"><a href="#cb14-5"></a><span class="co">#&gt;  [1,]    5   -4   -3   -6    8    2</span></span>
@@ -797,9 +814,9 @@ ave(|q|) = \frac{2 \sum_{i=1}^{k-1} \sum_{j=i+1}^{k}|q_{ij}|}{k(k-1)}, \, \, max
 <span id="cb14-21"><a href="#cb14-21"></a><span class="co">#&gt; [17,]   -6   -8   -2   -5   -4   -3</span></span>
 <span id="cb14-22"><a href="#cb14-22"></a><span class="kw">MaxAbsCor</span>(tryOLHD)  <span class="co">#zero columnwise correlations</span></span>
 <span id="cb14-23"><a href="#cb14-23"></a><span class="co">#&gt; [1] 0</span></span></code></pre></div>
-<p>Cioppa and Lucas (2007) extended Ye’s idea, and their method accommodates more factors given the same run size. Our function “OLHD2007” implements this method. See the following code and example.</p>
+<p>Cioppa and Lucas (2007) extended Ye’s idea, and their method is able to accommodate more factors with the same run size. Our function “OLHD.C2007” implements this method. See the following code and example.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co">#create an orthogonal LHD with m=4. So n=2^m+1=17 and k=4+3=7</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>tryOLHD=<span class="kw">OLHD2007</span>(<span class="dt">m=</span><span class="dv">4</span>)</span>
+<span id="cb15-2"><a href="#cb15-2"></a>tryOLHD=<span class="kw">OLHD.C2007</span>(<span class="dt">m=</span><span class="dv">4</span>)</span>
 <span id="cb15-3"><a href="#cb15-3"></a>tryOLHD</span>
 <span id="cb15-4"><a href="#cb15-4"></a><span class="co">#&gt;       [,1] [,2] [,3] [,4] [,5] [,6] [,7]</span></span>
 <span id="cb15-5"><a href="#cb15-5"></a><span class="co">#&gt;  [1,]    1   -2   -4   -8    3    7    5</span></span>
@@ -821,9 +838,9 @@ ave(|q|) = \frac{2 \sum_{i=1}^{k-1} \sum_{j=i+1}^{k}|q_{ij}|}{k(k-1)}, \, \, max
 <span id="cb15-21"><a href="#cb15-21"></a><span class="co">#&gt; [17,]   -8   -7   -5   -1   -6   -2   -4</span></span>
 <span id="cb15-22"><a href="#cb15-22"></a><span class="kw">MaxAbsCor</span>(tryOLHD)  <span class="co">#zero columnwise correlations</span></span>
 <span id="cb15-23"><a href="#cb15-23"></a><span class="co">#&gt; [1] 0</span></span></code></pre></div>
-<p>Lin et al. (2009) proposed to couple an OLHD and an OA to generate OLHDs with large factor size. Our function “OLHD2009” implements this method. See the following code and example.</p>
+<p>Lin et al. (2009) proposed to couple OLHDs with OAs to generate OLHDs with large factor size. Our function “OLHD.L2009” implements this method. See the following code and example.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co">#create a 5 by 2 OLHD</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>OLHD=<span class="kw">OLHD2007</span>(<span class="dt">m=</span><span class="dv">2</span>)</span>
+<span id="cb16-2"><a href="#cb16-2"></a>OLHD=<span class="kw">OLHD.C2007</span>(<span class="dt">m=</span><span class="dv">2</span>)</span>
 <span id="cb16-3"><a href="#cb16-3"></a></span>
 <span id="cb16-4"><a href="#cb16-4"></a><span class="co">#create an OA(25,6,5,2)</span></span>
 <span id="cb16-5"><a href="#cb16-5"></a>OA=<span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>,</span>
@@ -834,7 +851,7 @@ ave(|q|) = \frac{2 \sum_{i=1}^{k-1} \sum_{j=i+1}^{k}|q_{ij}|}{k(k-1)}, \, \, max
 <span id="cb16-10"><a href="#cb16-10"></a><span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>),<span class="dt">ncol=</span><span class="dv">6</span>,<span class="dt">nrow=</span><span class="dv">25</span>,<span class="dt">byrow=</span>T)</span>
 <span id="cb16-11"><a href="#cb16-11"></a></span>
 <span id="cb16-12"><a href="#cb16-12"></a><span class="co">#Construct a 25 by 12 OLHD</span></span>
-<span id="cb16-13"><a href="#cb16-13"></a>tryOLHD=<span class="kw">OLHD2009</span>(OLHD,OA)</span>
+<span id="cb16-13"><a href="#cb16-13"></a>tryOLHD=<span class="kw">OLHD.L2009</span>(OLHD,OA)</span>
 <span id="cb16-14"><a href="#cb16-14"></a>tryOLHD</span>
 <span id="cb16-15"><a href="#cb16-15"></a><span class="co">#&gt;       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]</span></span>
 <span id="cb16-16"><a href="#cb16-16"></a><span class="co">#&gt;  [1,]   12   -8   12   -8    7   -9    6   -4    6    -4    -9    -7</span></span>
@@ -864,10 +881,10 @@ ave(|q|) = \frac{2 \sum_{i=1}^{k-1} \sum_{j=i+1}^{k}|q_{ij}|}{k(k-1)}, \, \, max
 <span id="cb16-40"><a href="#cb16-40"></a><span class="co">#&gt; [25,]  -11    3   11   -3   10    2   -3  -11    3    11     5     1</span></span>
 <span id="cb16-41"><a href="#cb16-41"></a><span class="kw">MaxAbsCor</span>(tryOLHD)  <span class="co">#zero columnwise correlations</span></span>
 <span id="cb16-42"><a href="#cb16-42"></a><span class="co">#&gt; [1] 0</span></span></code></pre></div>
-<p>Sun et al. (2010) proposed to construct OLHDs with flexible run sizes. Our function “OLHD2010” implements this method. See the following code and example.</p>
+<p>Sun et al. (2010) proposed to construct OLHDs with flexible run sizes via matrices manipulations. Our function “OLHD.S2010” implements this method. See the following code and example.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co">#create an orthogonal LHD with C=3, r=3, type=&quot;odd&quot;.</span></span>
 <span id="cb17-2"><a href="#cb17-2"></a><span class="co">#So n=3*2^4+1=49 and k=2^3=8</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a>tryOLHD1=<span class="kw">OLHD2010</span>(<span class="dt">C=</span><span class="dv">3</span>,<span class="dt">r=</span><span class="dv">3</span>,<span class="dt">type=</span><span class="st">&quot;odd&quot;</span>)</span>
+<span id="cb17-3"><a href="#cb17-3"></a>tryOLHD1=<span class="kw">OLHD.S2010</span>(<span class="dt">C=</span><span class="dv">3</span>,<span class="dt">r=</span><span class="dv">3</span>,<span class="dt">type=</span><span class="st">&quot;odd&quot;</span>)</span>
 <span id="cb17-4"><a href="#cb17-4"></a>tryOLHD1</span>
 <span id="cb17-5"><a href="#cb17-5"></a><span class="co">#&gt;       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]</span></span>
 <span id="cb17-6"><a href="#cb17-6"></a><span class="co">#&gt;  [1,]    1    2    3    4    5    6    7    8</span></span>
@@ -922,7 +939,7 @@ ave(|q|) = \frac{2 \sum_{i=1}^{k-1} \sum_{j=i+1}^{k}|q_{ij}|}{k(k-1)}, \, \, max
 <span id="cb17-55"><a href="#cb17-55"></a></span>
 <span id="cb17-56"><a href="#cb17-56"></a><span class="co">#create an orthogonal LHD with C=3, r=3, type=&quot;even&quot;.</span></span>
 <span id="cb17-57"><a href="#cb17-57"></a><span class="co">#So n=3*2^4=48 and k=2^3=8</span></span>
-<span id="cb17-58"><a href="#cb17-58"></a>tryOLHD2=<span class="kw">OLHD2010</span>(<span class="dt">C=</span><span class="dv">3</span>,<span class="dt">r=</span><span class="dv">3</span>,<span class="dt">type=</span><span class="st">&quot;even&quot;</span>)</span>
+<span id="cb17-58"><a href="#cb17-58"></a>tryOLHD2=<span class="kw">OLHD.S2010</span>(<span class="dt">C=</span><span class="dv">3</span>,<span class="dt">r=</span><span class="dv">3</span>,<span class="dt">type=</span><span class="st">&quot;even&quot;</span>)</span>
 <span id="cb17-59"><a href="#cb17-59"></a>tryOLHD2</span>
 <span id="cb17-60"><a href="#cb17-60"></a><span class="co">#&gt;        [,1]  [,2]  [,3]  [,4]  [,5]  [,6]  [,7]  [,8]</span></span>
 <span id="cb17-61"><a href="#cb17-61"></a><span class="co">#&gt;  [1,]   0.5   1.5   2.5   3.5   4.5   5.5   6.5   7.5</span></span>
@@ -978,9 +995,9 @@ ave(|q|) = \frac{2 \sum_{i=1}^{k-1} \sum_{j=i+1}^{k}|q_{ij}|}{k(k-1)}, \, \, max
 <span id="cb17-111"><a href="#cb17-111"></a><span class="co">#&gt; [1] 0</span></span>
 <span id="cb17-112"><a href="#cb17-112"></a><span class="kw">MaxAbsCor</span>(tryOLHD2)  <span class="co">#zero columnwise correlations</span></span>
 <span id="cb17-113"><a href="#cb17-113"></a><span class="co">#&gt; [1] 0</span></span></code></pre></div>
-<p>Butler (2001) proposed to construct OLHDs using Williams transformation. Our function “OLHD2001” implements this method. See the following code and example.</p>
+<p>Butler (2001) proposed to construct OLHDs using Williams transformation. Our function “OLHD.B2001” implements this method. See the following code and example.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co">#create an orthogonal LHD with n=11 and k=5</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">OLHD2001</span>(<span class="dt">n=</span><span class="dv">11</span>,<span class="dt">k=</span><span class="dv">5</span>)</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">OLHD.B2001</span>(<span class="dt">n=</span><span class="dv">11</span>,<span class="dt">k=</span><span class="dv">5</span>)</span>
 <span id="cb18-3"><a href="#cb18-3"></a><span class="co">#&gt;       [,1] [,2] [,3] [,4] [,5]</span></span>
 <span id="cb18-4"><a href="#cb18-4"></a><span class="co">#&gt;  [1,]    3    4    2    1    5</span></span>
 <span id="cb18-5"><a href="#cb18-5"></a><span class="co">#&gt;  [2,]   11    2    3    7    8</span></span>
@@ -995,7 +1012,7 @@ ave(|q|) = \frac{2 \sum_{i=1}^{k-1} \sum_{j=i+1}^{k}|q_{ij}|}{k(k-1)}, \, \, max
 <span id="cb18-14"><a href="#cb18-14"></a><span class="co">#&gt; [11,]    6    6    6    6    6</span></span>
 <span id="cb18-15"><a href="#cb18-15"></a></span>
 <span id="cb18-16"><a href="#cb18-16"></a><span class="co">#create an orthogonal LHD with n=7 and k=6</span></span>
-<span id="cb18-17"><a href="#cb18-17"></a><span class="kw">OLHD2001</span>(<span class="dt">n=</span><span class="dv">7</span>,<span class="dt">k=</span><span class="dv">6</span>)</span>
+<span id="cb18-17"><a href="#cb18-17"></a><span class="kw">OLHD.B2001</span>(<span class="dt">n=</span><span class="dv">7</span>,<span class="dt">k=</span><span class="dv">6</span>)</span>
 <span id="cb18-18"><a href="#cb18-18"></a><span class="co">#&gt;      [,1] [,2] [,3] [,4] [,5] [,6]</span></span>
 <span id="cb18-19"><a href="#cb18-19"></a><span class="co">#&gt; [1,]    2    1    3    7    3    5</span></span>
 <span id="cb18-20"><a href="#cb18-20"></a><span class="co">#&gt; [2,]    1    5    6    2    5    6</span></span>
