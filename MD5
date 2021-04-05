@@ -1,7 +1,7 @@
-acc768c1834cba4726ab2cb512cedfc6 *DESCRIPTION
+1c28f7088aa6894e88687a64f4717e0b *DESCRIPTION
 9f16ef13c1ee77c96da8f2961be5a354 *LICENSE
 befe94068b721819b33fa0862f0fa65d *NAMESPACE
-604fae0d9e161c9b18582f7652df40f5 *NEWS.md
+d1ff316baaff1bce92145fcc1023750e *NEWS.md
 768f1737857800a60ae330afb1a6ba50 *R/AvgAbsCor.R
 0807bba10e0ab3bfd1140ff6adec9abe *R/FastMmLHD.R
 63dca1dbc2a7fc6fbd45bcee56b49554 *R/GA.R
@@ -21,13 +21,13 @@ b1a5cc7d08768ddcf4ddeef73f51f080 *R/SA.R
 8fd0fb3d5bf6a63244e882a4a61fe25f *R/SLHD.R
 60093c0c91e821aa1d3e3d8970ab7e40 *R/WT.R
 830b8dab2a27fedf973aaf9ebfeb29d8 *R/dij.R
-da8e30d16f9283ca08797e7bc3f6d80f *R/exchange.R
+b738b382f10983b1c327f55d15e323b7 *R/exchange.R
 e9ebb11d4f50e43ba382c34649bfe97c *R/phi_p.R
 27ac0e726e55275bbd511b00d4dee270 *R/rLHD.R
-d7c0dbe667a96ea9e5f5da4cbc4f1681 *build/vignette.rds
+77ba5fe4d4aba792ffa6a5aab5e23589 *build/vignette.rds
 e23f9b4b0046d4ab60e0fc64197d0ec0 *inst/doc/Vignette_for_LHD.R
 90cc4b2a3b9f1b3e6960e5fe3946050f *inst/doc/Vignette_for_LHD.Rmd
-ef83a32a5cd179d684ed88ae01ad8b8f *inst/doc/Vignette_for_LHD.html
+f3565f21bd04f9f7d8391cc2c9b3e59e *inst/doc/Vignette_for_LHD.html
 0b69f731302684aa0bfe4f0e202ae949 *man/AvgAbsCor.Rd
 65b927ff183b20034cd20f8ba08d5926 *man/FastMmLHD.Rd
 8c8d06db6197b5a8c1e0d3050729c3b8 *man/GA.Rd
@@ -47,7 +47,7 @@ cccd5ed19de3f827a4e870356e4b060c *man/SA2008.Rd
 3ba7a6105b602f69aed0f1ebb1be036d *man/SLHD.Rd
 815392969264d17fc03d7951776003f9 *man/WT.Rd
 9356ea65643c24cf2baf094f31064d2c *man/dij.Rd
-2e09f83c278ac554f07cc0df94d8da08 *man/exchange.Rd
+842f600adce289db6d80be30255ebf7f *man/exchange.Rd
 c20a0cbc989593e855d29f7cbb4f113c *man/phi_p.Rd
 8cf408cfed22daf03b037d49d8ba173d *man/rLHD.Rd
 4c02e71d3dafede869bb51e05249c9c5 *tests/testthat.R

@@ -1,3 +1,9 @@
+#LHD 1.3.2
+
+* The `exchange` function was updated and now it is capable of exchanging elements either column-wise or row-wise.
+
+* The DESCRIPTION file, documentations (.Rd files), vignettes, and test files were updated accordingly.
+
 #LHD 1.3.1
 
 * The following five functions were re-named to avoid confusions: `OLHD1998`, `OLHD2001`, `OLHD2007`, `OLHD2009`, and `OLHD2010`.

@@ -1,9 +1,11 @@
-#' Exchange two random elements
+#' Exchange two random elements in a matrix
 #'
-#' \code{exchange} returns a new design matrix after two randomly selected elements are switched from a user-defined column
+#' \code{exchange} returns a new matrix by switching two randomly selected elements from a user-defined matrix
 #'
-#' @param X A matrix object. In general, \code{X} stands for the design matrix.
-#' @param j A positive integer, which stands for the j^{th} column of \code{X}, and it should be in [1,ncol(X)].
+#'
+#' @param X A matrix object. In general, \code{X} stands for a design matrix.
+#' @param j A positive integer, which stands for the j^{th} column (or row) of \code{X}, and it should be within [1,ncol(X)] (or [1,nrow(X)]).
+#' @param type An exchange type. If \code{type} is "col" (the default setting), two random elements will be exchanged within column \code{j}. If \code{type} is "row", two random elements will be exchanged within row \code{j}.
 #'
 #' @return If all inputs are logical, then the output will be a new design matrix after the exchange.
 #'
@@ -12,23 +14,41 @@
 #' toy=rLHD(n=5,k=3);toy
 #'
 #' #Choose the first column of toy and exchange two randomly selected elements.
-#' try=exchange(X=toy,j=1)
-#' toy;try
+#' try.col=exchange(X=toy,j=1,type="col")
+#' toy;try.col
+#'
+#' #Choose the first row of toy and exchange two randomly selected elements.
+#' try.row=exchange(X=toy,j=1,type="row")
+#' toy;try.row
 #' @export
 
-exchange=function(X,j){
-  #Exchange two randomly selected elements within the column j of matrix X
-  #return with a Xnew, which is the matrix after exchange.
+exchange=function(X,j,type="col"){
 
-  location=sample(1:nrow(X),2)    #randomly selected two elements
-  e1=location[1]                  #record the location of the 1st element
-  e2=location[2]                  #record the location of the 2nd element
-  et=NULL                         #This is a transit element
+  if(type=="col"){
+    #Exchange two randomly selected elements within the column j of matrix X
+    #return with a new X, which is the matrix after exchange.
 
-  Xnew=X
-  et=Xnew[e1,j]
-  Xnew[e1,j]=Xnew[e2,j]
-  Xnew[e2,j]=et
+    location=sample(1:nrow(X),2)    #randomly select two rows
 
-  Xnew
+    e1=X[location[1],j]             #record the 1st element
+    e2=X[location[2],j]             #record the 2nd element
+
+    X[location[1],j]=e2
+    X[location[2],j]=e1
+  }
+
+  if(type=="row"){
+    #Exchange two randomly selected elements within the row j of matrix X
+    #return with a new X, which is the matrix after exchange.
+
+    location=sample(1:ncol(X),2)    #randomly select two cols
+
+    e1=X[j,location[1]]             #record the 1st element
+    e2=X[j,location[2]]             #record the 2nd element
+
+    X[j,location[1]]=e2
+    X[j,location[2]]=e1
+  }
+
+  X
 }

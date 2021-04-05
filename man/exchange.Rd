@@ -2,26 +2,32 @@
 % Please edit documentation in R/exchange.R
 \name{exchange}
 \alias{exchange}
-\title{Exchange two random elements}
+\title{Exchange two random elements in a matrix}
 \usage{
-exchange(X, j)
+exchange(X, j, type = "col")
 }
 \arguments{
-\item{X}{A matrix object. In general, \code{X} stands for the design matrix.}
+\item{X}{A matrix object. In general, \code{X} stands for a design matrix.}
 
-\item{j}{A positive integer, which stands for the j^{th} column of \code{X}, and it should be in [1,ncol(X)].}
+\item{j}{A positive integer, which stands for the j^{th} column (or row) of \code{X}, and it should be within [1,ncol(X)] (or [1,nrow(X)]).}
+
+\item{type}{An exchange type. If \code{type} is "col" (the default setting), two random elements will be exchanged within column \code{j}. If \code{type} is "row", two random elements will be exchanged within row \code{j}.}
 }
 \value{
 If all inputs are logical, then the output will be a new design matrix after the exchange.
 }
 \description{
-\code{exchange} returns a new design matrix after two randomly selected elements are switched from a user-defined column
+\code{exchange} returns a new matrix by switching two randomly selected elements from a user-defined matrix
 }
 \examples{
 #create a toy LHD with 5 rows and 3 columns
 toy=rLHD(n=5,k=3);toy
 
 #Choose the first column of toy and exchange two randomly selected elements.
-try=exchange(X=toy,j=1)
-toy;try
+try.col=exchange(X=toy,j=1,type="col")
+toy;try.col
+
+#Choose the first row of toy and exchange two randomly selected elements.
+try.row=exchange(X=toy,j=1,type="row")
+toy;try.row
 }
