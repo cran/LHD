@@ -51,8 +51,6 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
   maxtime=maxtime*60  #convert minutes to seconds
   timeALL=NULL        #record all cpu time
 
-  width=options()$width    #This is for process bar
-
   C=1  #Initialize counter index
 
   #step 2 starts, each X[,,i] is the L_i^{0}, i=1, ..., m
@@ -80,6 +78,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
 
     Xnew=X     #step 5
 
+    progressbar = utils::txtProgressBar(min = 0, max = N, style = 3)
 
     while(C<=N){
 
@@ -100,7 +99,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
               if (e_r!=e_p){
 
                 #locate the row number of e_p in column j of current LHD, L_i^{new}.
-                location=cbind(X[,j,i],1:n)[,2][cbind(X[,j,i],1:n)[,1]==e_p]
+                location=cbind(Xnew[,j,i],1:n)[,2][cbind(Xnew[,j,i],1:n)[,1]==e_p]
 
                 Xnew[location,j,i]=e_r
 
@@ -123,7 +122,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
               if (e_r!=e_g){
 
                 #locate the row number of e_p in column j of current LHD, L_i^{new}.
-                location=cbind(X[,j,i],1:n)[,2][cbind(X[,j,i],1:n)[,1]==e_g]
+                location=cbind(Xnew[,j,i],1:n)[,2][cbind(Xnew[,j,i],1:n)[,1]==e_g]
 
                 Xnew[location,j,i]=e_r
 
@@ -139,7 +138,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
 
           if (z<p0){
 
-            Xnew[,,i]=exchange(X=X[,,i],j=j)   #step 11
+            Xnew[,,i]=exchange(X=Xnew[,,i],j=j)   #step 11
 
           }          #step 12: end if
 
@@ -160,9 +159,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
       timeALL=c(timeALL,timediff)
 
       ##########progress bar codes
-      cat('\014')
-      cat(c(paste0(rep('=', C/N*width), collapse = ''), paste0(round(C/N*100), '% completed. '), paste0('The maximum CPU time is ',maxtime,' seconds')))
-
+      utils::setTxtProgressBar(progressbar, C)
       ##########
 
       if(as.numeric(sum(timeALL)+timediff)<=maxtime){C=C+1}
@@ -186,6 +183,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
 
     Xnew=X     #step 5
 
+    progressbar = utils::txtProgressBar(min = 0, max = N, style = 3)
 
     while(C<=N){
 
@@ -206,7 +204,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
               if (e_r!=e_p){
 
                 #locate the row number of e_p in column j of current LHD, L_i^{new}.
-                location=cbind(X[,j,i],1:n)[,2][cbind(X[,j,i],1:n)[,1]==e_p]
+                location=cbind(Xnew[,j,i],1:n)[,2][cbind(Xnew[,j,i],1:n)[,1]==e_p]
 
                 Xnew[location,j,i]=e_r
 
@@ -229,7 +227,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
               if (e_r!=e_g){
 
                 #locate the row number of e_p in column j of current LHD, L_i^{new}.
-                location=cbind(X[,j,i],1:n)[,2][cbind(X[,j,i],1:n)[,1]==e_g]
+                location=cbind(Xnew[,j,i],1:n)[,2][cbind(Xnew[,j,i],1:n)[,1]==e_g]
 
                 Xnew[location,j,i]=e_r
 
@@ -245,7 +243,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
 
           if (z<p0){
 
-            Xnew[,,i]=exchange(X=X[,,i],j=j)   #step 11
+            Xnew[,,i]=exchange(X=Xnew[,,i],j=j)   #step 11
 
           }          #step 12: end if
 
@@ -266,9 +264,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
       timeALL=c(timeALL,timediff)
 
       ##########progress bar codes
-      cat('\014')
-      cat(c(paste0(rep('=', C/N*width), collapse = ''), paste0(round(C/N*100), '% completed. '), paste0('The maximum CPU time is ',maxtime,' seconds')))
-
+      utils::setTxtProgressBar(progressbar, C)
       ##########
 
       if(as.numeric(sum(timeALL)+timediff)<=maxtime){C=C+1}
@@ -292,6 +288,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
 
     Xnew=X     #step 5
 
+    progressbar = utils::txtProgressBar(min = 0, max = N, style = 3)
 
     while(C<=N){
 
@@ -312,7 +309,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
               if (e_r!=e_p){
 
                 #locate the row number of e_p in column j of current LHD, L_i^{new}.
-                location=cbind(X[,j,i],1:n)[,2][cbind(X[,j,i],1:n)[,1]==e_p]
+                location=cbind(Xnew[,j,i],1:n)[,2][cbind(Xnew[,j,i],1:n)[,1]==e_p]
 
                 Xnew[location,j,i]=e_r
 
@@ -335,7 +332,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
               if (e_r!=e_g){
 
                 #locate the row number of e_p in column j of current LHD, L_i^{new}.
-                location=cbind(X[,j,i],1:n)[,2][cbind(X[,j,i],1:n)[,1]==e_g]
+                location=cbind(Xnew[,j,i],1:n)[,2][cbind(Xnew[,j,i],1:n)[,1]==e_g]
 
                 Xnew[location,j,i]=e_r
 
@@ -351,7 +348,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
 
           if (z<p0){
 
-            Xnew[,,i]=exchange(X=X[,,i],j=j)   #step 11
+            Xnew[,,i]=exchange(X=Xnew[,,i],j=j)   #step 11
 
           }          #step 12: end if
 
@@ -372,9 +369,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
       timeALL=c(timeALL,timediff)
 
       ##########progress bar codes
-      cat('\014')
-      cat(c(paste0(rep('=', C/N*width), collapse = ''), paste0(round(C/N*100), '% completed. '), paste0('The maximum CPU time is ',maxtime,' seconds')))
-
+      utils::setTxtProgressBar(progressbar, C)
       ##########
 
       if(as.numeric(sum(timeALL)+timediff)<=maxtime){C=C+1}
@@ -398,6 +393,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
 
     Xnew=X     #step 5
 
+    progressbar = utils::txtProgressBar(min = 0, max = N, style = 3)
 
     while(C<=N){
 
@@ -418,7 +414,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
               if (e_r!=e_p){
 
                 #locate the row number of e_p in column j of current LHD, L_i^{new}.
-                location=cbind(X[,j,i],1:n)[,2][cbind(X[,j,i],1:n)[,1]==e_p]
+                location=cbind(Xnew[,j,i],1:n)[,2][cbind(Xnew[,j,i],1:n)[,1]==e_p]
 
                 Xnew[location,j,i]=e_r
 
@@ -441,7 +437,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
               if (e_r!=e_g){
 
                 #locate the row number of e_p in column j of current LHD, L_i^{new}.
-                location=cbind(X[,j,i],1:n)[,2][cbind(X[,j,i],1:n)[,1]==e_g]
+                location=cbind(Xnew[,j,i],1:n)[,2][cbind(Xnew[,j,i],1:n)[,1]==e_g]
 
                 Xnew[location,j,i]=e_r
 
@@ -457,7 +453,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
 
           if (z<p0){
 
-            Xnew[,,i]=exchange(X=X[,,i],j=j)   #step 11
+            Xnew[,,i]=exchange(X=Xnew[,,i],j=j)   #step 11
 
           }          #step 12: end if
 
@@ -478,9 +474,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
       timeALL=c(timeALL,timediff)
 
       ##########progress bar codes
-      cat('\014')
-      cat(c(paste0(rep('=', C/N*width), collapse = ''), paste0(round(C/N*100), '% completed. '), paste0('The maximum CPU time is ',maxtime,' seconds')))
-
+      utils::setTxtProgressBar(progressbar, C)
       ##########
 
       if(as.numeric(sum(timeALL)+timediff)<=maxtime){C=C+1}
@@ -492,7 +486,7 @@ LaPSO=function(n,k,m=10,N=10,SameNumP=0,SameNumG=n/4,p0=1/(k-1),OC="phi_p",p=15,
   avgtime=round(mean(timeALL),2)
   iterations=length(timeALL)
 
-  cat('\014')
+  close(progressbar)
   print(paste0("average CPU time per iteration is: ", avgtime, " seconds"))
   print(paste0("the number of iterations completed is: ", iterations))
   print(paste0("the elements in design matrix is scaled to be 1 to ", n))

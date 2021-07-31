@@ -56,8 +56,6 @@ SLHD=function(n,k,t=1,N=10,T0=10,rate=0.1,Tmin=1,Imax=3,OC="phi_p",p=15,q=1,stag
   timeALL1=NULL        #record all cpu time
   timeALL2=NULL        #record all cpu time
 
-  width=options()$width    #This is for process bar
-
   C=1  #Initialize counter index
 
   m=n/t     #the rs for each slice.
@@ -140,6 +138,9 @@ SLHD=function(n,k,t=1,N=10,T0=10,rate=0.1,Tmin=1,Imax=3,OC="phi_p",p=15,q=1,stag
   Xbest=X;TP=T0;Flag=1
 
   if(OC=="phi_p"){
+
+    progressbar = utils::txtProgressBar(min = 0, max = N, style = 3)
+
     while (C<=N) {
 
       time0=Sys.time()
@@ -237,9 +238,7 @@ SLHD=function(n,k,t=1,N=10,T0=10,rate=0.1,Tmin=1,Imax=3,OC="phi_p",p=15,q=1,stag
       timeALL1=c(timeALL1,timediff)
 
       ##########progress bar codes
-      cat('\014')
-      cat(c(paste0(rep('=', C/N*width), collapse = ''), paste0(round(C/N*100), '% completed for Stage I. '), paste0('The maximum CPU time is ',maxtime,' seconds')))
-
+      utils::setTxtProgressBar(progressbar, C)
       ##########
 
       timeALL=sum(timeALL1)+sum(timeALL2)
@@ -374,9 +373,7 @@ SLHD=function(n,k,t=1,N=10,T0=10,rate=0.1,Tmin=1,Imax=3,OC="phi_p",p=15,q=1,stag
         timeALL2=c(timeALL2,timediff)
 
         ##########progress bar codes
-        cat('\014')
-        cat(c(paste0(rep('=', C/N*width), collapse = ''), paste0(round(C/N*100), '% completed for Stage II. '), paste0('The maximum CPU time is ',maxtime,' seconds')))
-
+        utils::setTxtProgressBar(progressbar, C)
         ##########
 
 
@@ -395,6 +392,9 @@ SLHD=function(n,k,t=1,N=10,T0=10,rate=0.1,Tmin=1,Imax=3,OC="phi_p",p=15,q=1,stag
   }
 
   if(OC=="AvgAbsCor"){
+
+    progressbar = utils::txtProgressBar(min = 0, max = N, style = 3)
+
     while (C<=N) {
 
       time0=Sys.time()
@@ -492,9 +492,7 @@ SLHD=function(n,k,t=1,N=10,T0=10,rate=0.1,Tmin=1,Imax=3,OC="phi_p",p=15,q=1,stag
       timeALL1=c(timeALL1,timediff)
 
       ##########progress bar codes
-      cat('\014')
-      cat(c(paste0(rep('=', C/N*width), collapse = ''), paste0(round(C/N*100), '% completed for Stage I. '), paste0('The maximum CPU time is ',maxtime,' seconds')))
-
+      utils::setTxtProgressBar(progressbar, C)
       ##########
 
       timeALL=sum(timeALL1)+sum(timeALL2)
@@ -629,9 +627,7 @@ SLHD=function(n,k,t=1,N=10,T0=10,rate=0.1,Tmin=1,Imax=3,OC="phi_p",p=15,q=1,stag
         timeALL2=c(timeALL2,timediff)
 
         ##########progress bar codes
-        cat('\014')
-        cat(c(paste0(rep('=', C/N*width), collapse = ''), paste0(round(C/N*100), '% completed for Stage II. '), paste0('The maximum CPU time is ',maxtime,' seconds')))
-
+        utils::setTxtProgressBar(progressbar, C)
         ##########
 
 
@@ -650,6 +646,9 @@ SLHD=function(n,k,t=1,N=10,T0=10,rate=0.1,Tmin=1,Imax=3,OC="phi_p",p=15,q=1,stag
   }
 
   if(OC=="MaxAbsCor"){
+
+    progressbar = utils::txtProgressBar(min = 0, max = N, style = 3)
+
     while (C<=N) {
 
       time0=Sys.time()
@@ -747,9 +746,7 @@ SLHD=function(n,k,t=1,N=10,T0=10,rate=0.1,Tmin=1,Imax=3,OC="phi_p",p=15,q=1,stag
       timeALL1=c(timeALL1,timediff)
 
       ##########progress bar codes
-      cat('\014')
-      cat(c(paste0(rep('=', C/N*width), collapse = ''), paste0(round(C/N*100), '% completed for Stage I. '), paste0('The maximum CPU time is ',maxtime,' seconds')))
-
+      utils::setTxtProgressBar(progressbar, C)
       ##########
 
       timeALL=sum(timeALL1)+sum(timeALL2)
@@ -884,9 +881,7 @@ SLHD=function(n,k,t=1,N=10,T0=10,rate=0.1,Tmin=1,Imax=3,OC="phi_p",p=15,q=1,stag
         timeALL2=c(timeALL2,timediff)
 
         ##########progress bar codes
-        cat('\014')
-        cat(c(paste0(rep('=', C/N*width), collapse = ''), paste0(round(C/N*100), '% completed for Stage II. '), paste0('The maximum CPU time is ',maxtime,' seconds')))
-
+        utils::setTxtProgressBar(progressbar, C)
         ##########
 
 
@@ -905,6 +900,9 @@ SLHD=function(n,k,t=1,N=10,T0=10,rate=0.1,Tmin=1,Imax=3,OC="phi_p",p=15,q=1,stag
   }
 
   if(OC=="MaxProCriterion"){
+
+    progressbar = utils::txtProgressBar(min = 0, max = N, style = 3)
+
     while (C<=N) {
 
       time0=Sys.time()
@@ -1002,9 +1000,7 @@ SLHD=function(n,k,t=1,N=10,T0=10,rate=0.1,Tmin=1,Imax=3,OC="phi_p",p=15,q=1,stag
       timeALL1=c(timeALL1,timediff)
 
       ##########progress bar codes
-      cat('\014')
-      cat(c(paste0(rep('=', C/N*width), collapse = ''), paste0(round(C/N*100), '% completed for Stage I. '), paste0('The maximum CPU time is ',maxtime,' seconds')))
-
+      utils::setTxtProgressBar(progressbar, C)
       ##########
 
       timeALL=sum(timeALL1)+sum(timeALL2)
@@ -1139,9 +1135,7 @@ SLHD=function(n,k,t=1,N=10,T0=10,rate=0.1,Tmin=1,Imax=3,OC="phi_p",p=15,q=1,stag
         timeALL2=c(timeALL2,timediff)
 
         ##########progress bar codes
-        cat('\014')
-        cat(c(paste0(rep('=', C/N*width), collapse = ''), paste0(round(C/N*100), '% completed for Stage II. '), paste0('The maximum CPU time is ',maxtime,' seconds')))
-
+        utils::setTxtProgressBar(progressbar, C)
         ##########
 
 
@@ -1167,7 +1161,7 @@ SLHD=function(n,k,t=1,N=10,T0=10,rate=0.1,Tmin=1,Imax=3,OC="phi_p",p=15,q=1,stag
   iterations2=length(timeALL2)
   }
 
-  cat('\014')
+  close(progressbar)
   print(paste0("average CPU time per iteration for Stage I is: ", avgtime1, " seconds"))
   if(stage2==TRUE){print(paste0("average CPU time per iteration for Stage II is: ", avgtime2, " seconds"))}
   print(paste0("the number of iterations completed for Stage I is: ", iterations1))

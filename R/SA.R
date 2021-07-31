@@ -44,8 +44,6 @@ SA=function(n,k,N=10,T0=10,rate=0.1,Tmin=1,Imax=5,OC="phi_p",p=15,q=1,maxtime=5)
   maxtime=maxtime*60  #convert minutes to seconds
   timeALL=NULL        #record all cpu time
 
-  width=options()$width    #This is for process bar
-
   C=1  #step 1: counter index
 
   X=rLHD(n=n,k=k)   #step 2
@@ -53,6 +51,9 @@ SA=function(n,k,N=10,T0=10,rate=0.1,Tmin=1,Imax=5,OC="phi_p",p=15,q=1,maxtime=5)
   Xbest=X;TP=T0;Flag=1
 
   if(OC=="phi_p"){
+
+    progressbar = utils::txtProgressBar(min = 0, max = N, style = 3)
+
     while (C<=N) {
 
       time0=Sys.time()
@@ -87,9 +88,7 @@ SA=function(n,k,N=10,T0=10,rate=0.1,Tmin=1,Imax=5,OC="phi_p",p=15,q=1,maxtime=5)
       timeALL=c(timeALL,timediff)
 
       ##########progress bar codes
-      cat('\014')
-      cat(c(paste0(rep('=', C/N*width), collapse = ''), paste0(round(C/N*100), '% completed. '), paste0('The maximum CPU time is ',maxtime,' seconds')))
-
+      utils::setTxtProgressBar(progressbar, C)
       ##########
 
       if(as.numeric(sum(timeALL)+timediff)<=maxtime){C=C+1}
@@ -101,6 +100,9 @@ SA=function(n,k,N=10,T0=10,rate=0.1,Tmin=1,Imax=5,OC="phi_p",p=15,q=1,maxtime=5)
   }
 
   if(OC=="AvgAbsCor"){
+
+    progressbar = utils::txtProgressBar(min = 0, max = N, style = 3)
+
     while (C<=N) {
 
       time0=Sys.time()
@@ -135,9 +137,7 @@ SA=function(n,k,N=10,T0=10,rate=0.1,Tmin=1,Imax=5,OC="phi_p",p=15,q=1,maxtime=5)
       timeALL=c(timeALL,timediff)
 
       ##########progress bar codes
-      cat('\014')
-      cat(c(paste0(rep('=', C/N*width), collapse = ''), paste0(round(C/N*100), '% completed. '), paste0('The maximum CPU time is ',maxtime,' seconds')))
-
+      utils::setTxtProgressBar(progressbar, C)
       ##########
 
       if(as.numeric(sum(timeALL)+timediff)<=maxtime){C=C+1}
@@ -149,6 +149,9 @@ SA=function(n,k,N=10,T0=10,rate=0.1,Tmin=1,Imax=5,OC="phi_p",p=15,q=1,maxtime=5)
   }
 
   if(OC=="MaxAbsCor"){
+
+    progressbar = utils::txtProgressBar(min = 0, max = N, style = 3)
+
     while (C<=N) {
 
       time0=Sys.time()
@@ -183,9 +186,7 @@ SA=function(n,k,N=10,T0=10,rate=0.1,Tmin=1,Imax=5,OC="phi_p",p=15,q=1,maxtime=5)
       timeALL=c(timeALL,timediff)
 
       ##########progress bar codes
-      cat('\014')
-      cat(c(paste0(rep('=', C/N*width), collapse = ''), paste0(round(C/N*100), '% completed. '), paste0('The maximum CPU time is ',maxtime,' seconds')))
-
+      utils::setTxtProgressBar(progressbar, C)
       ##########
 
       if(as.numeric(sum(timeALL)+timediff)<=maxtime){C=C+1}
@@ -197,6 +198,9 @@ SA=function(n,k,N=10,T0=10,rate=0.1,Tmin=1,Imax=5,OC="phi_p",p=15,q=1,maxtime=5)
   }
 
   if(OC=="MaxProCriterion"){
+
+    progressbar = utils::txtProgressBar(min = 0, max = N, style = 3)
+
     while (C<=N) {
 
       time0=Sys.time()
@@ -231,9 +235,7 @@ SA=function(n,k,N=10,T0=10,rate=0.1,Tmin=1,Imax=5,OC="phi_p",p=15,q=1,maxtime=5)
       timeALL=c(timeALL,timediff)
 
       ##########progress bar codes
-      cat('\014')
-      cat(c(paste0(rep('=', C/N*width), collapse = ''), paste0(round(C/N*100), '% completed. '), paste0('The maximum CPU time is ',maxtime,' seconds')))
-
+      utils::setTxtProgressBar(progressbar, C)
       ##########
 
       if(as.numeric(sum(timeALL)+timediff)<=maxtime){C=C+1}
@@ -247,7 +249,7 @@ SA=function(n,k,N=10,T0=10,rate=0.1,Tmin=1,Imax=5,OC="phi_p",p=15,q=1,maxtime=5)
   avgtime=round(mean(timeALL),2)
   iterations=length(timeALL)
 
-  cat('\014')
+  close(progressbar)
   print(paste0("average CPU time per iteration is: ", avgtime, " seconds"))
   print(paste0("the number of iterations completed is: ", iterations))
   print(paste0("the elements in design matrix is scaled to be 1 to ", n))

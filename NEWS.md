@@ -1,3 +1,7 @@
+#LHD 1.3.3
+
+* Updated the `LaPSO` function: the exchanging logic has been updated to provide more accurate results.
+
 #LHD 1.3.2
 
 * The `exchange` function was updated and now it is capable of exchanging elements either column-wise or row-wise.
