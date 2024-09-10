@@ -1,14 +1,26 @@
-#LHD 1.3.3
+# LHD 1.4.0
+
+* Updated maintainer's email address.
+
+* Fixed the NOTEs in CRAN checks.
+
+* Added MIT License file (LICENSE.md).
+
+* Updated testing codes in the testthat folder.
+
+* A minor update in the `FastMmLHD` function.
+
+# LHD 1.3.3
 
 * Updated the `LaPSO` function: the exchanging logic has been updated to provide more accurate results.
 
-#LHD 1.3.2
+# LHD 1.3.2
 
 * The `exchange` function was updated and now it is capable of exchanging elements either column-wise or row-wise.
 
 * The DESCRIPTION file, documentations (.Rd files), vignettes, and test files were updated accordingly.
 
-#LHD 1.3.1
+# LHD 1.3.1
 
 * The following five functions were re-named to avoid confusions: `OLHD1998`, `OLHD2001`, `OLHD2007`, `OLHD2009`, and `OLHD2010`.
   - `OLHD1998` now is called `OLHD.Y1998`.
@@ -22,7 +34,7 @@
 * The DESCRIPTION file, documentations (.Rd files), vignettes, and test files were updated accordingly.
   - Documentations were updated to provide recommendations to new users on how to set input arguments properly.
 
-#LHD 1.3.0
+# LHD 1.3.0
 
 * Part I - We added the following four functions: `OLHD2001`, `OLHD2007`, `OLHD2009`, and `OLHD2010`.
 
@@ -30,7 +42,7 @@
 
 * Part II - The DESCRIPTION file, documentations (.Rd files), vignettes, and test files were updated accordingly.
 
-#LHD 1.2.0
+# LHD 1.2.0
 
 * Part I - We added the following six functions: `FastMmLHD`, `GLP`, `LOO`, `LPWT`, `MWT`, `OLHD1998`, and `WT`.
 
@@ -44,7 +56,7 @@
 
 * Part III - The DESCRIPTION file, documentations (.Rd files), vignettes, and test files were updated accordingly.
 
-#LHD 1.1.0
+# LHD 1.1.0
 
 * Part I - We added the following three optimality criteria functions:
 
@@ -64,11 +76,11 @@
 
 * Part III - The DESCRIPTION file, documentations (.Rd files), vignettes, and test files were updated accordingly.
 
-#LHD 0.1.3
+# LHD 0.1.3
 
 * Updated the `SLHD` function: the exchanging logic in Stage II has been updated.
 
-#LHD 0.1.2
+# LHD 0.1.2
 
 * The following functions have been updated: `SA`, `OASA`, `SA2008`, `SLHD`, `GA`, and `LaPSO`. 
   -The default input argument p used to be 50, and now is set to be 15. 
@@ -77,6 +89,6 @@
 
 * This update also fixed the errors from the CRAN Package Check Results.
 
-#LHD 0.1.1
+# LHD 0.1.1
 
 * The Description field of DESCRIPTION file has been updated.

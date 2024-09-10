@@ -40,11 +40,11 @@ FastMmLHD=function(n,k,method="manhattan",t1=10){
   #method: the distance method, with default setting is "manhattan".
   #t1: tunning parameter
 
-  if (!(class(n) == "numeric") || !(n%%1 == 0) || (n < 3))
+  if (is.numeric(n) != TRUE || !(n%%1 == 0) || (n < 3))
   {
     stop("'n' must be a postive integer no less than 3")
   }
-  if (!(class(k) == "numeric") || !(k%%1 == 0) || (k < 2))
+  if (is.numeric(k) != TRUE || !(k%%1 == 0) || (k < 2))
   {
     stop("'k' must be a postive integer no less than 2")
   }

@@ -9,7 +9,7 @@ exchange(X, j, type = "col")
 \arguments{
 \item{X}{A matrix object. In general, \code{X} stands for a design matrix.}
 
-\item{j}{A positive integer, which stands for the j^{th} column (or row) of \code{X}, and it should be within [1,ncol(X)] (or [1,nrow(X)]).}
+\item{j}{A positive integer, which stands for the jth column (or row) of \code{X}, and it should be within [1,ncol(X)] (or [1,nrow(X)]).}
 
 \item{type}{An exchange type. If \code{type} is "col" (the default setting), two random elements will be exchanged within column \code{j}. If \code{type} is "row", two random elements will be exchanged within row \code{j}.}
 }

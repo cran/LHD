@@ -38,7 +38,19 @@ test_that("Exchange two random elements", {
 test_that("Transfer an Orthogonal Array (OA) into a LHD", {
   #create an OA(9,2,3,2)
   OA=matrix(c(rep(1:3,each=3),rep(1:3,times=3)),ncol=2,nrow=9,byrow = F)
-  tryOA=OA2LHD(OA=OA)
-  expect_equal(dim(tryOA),c(9,2))    #dim is the same
-  expect_equal(sort(tryOA[,1]),1:9)  #the resulting matrix should be a LHD
+  try.OA=OA2LHD(OA=OA)
+
+  #check if the dimensions are expected
+  expect_equal(dim(try.OA),c(9,2))    #dim is the same
+
+  #check if the result satisfies the LHD properties
+  n=9;k=2
+
+  for (j in 1:k) {
+
+    #check whether each column has elements of 1 to n
+    expect_equal(sort(try.OA[,j]),1:n)
+
+  }
+
 })

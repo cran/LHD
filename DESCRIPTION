@@ -1,23 +1,23 @@
 Package: LHD
 Type: Package
 Title: Latin Hypercube Designs (LHDs)
-Version: 1.3.3
+Version: 1.4.0
 Authors@R: c(
-    person("Hongzhi", "Wang", email="hw34508@uga.edu", role=c("aut","cre")),
+    person("Hongzhi", "Wang", email="wanghongzhi.ut@gmail.com", role=c("aut","cre")),
     person("Qian", "Xiao", role="aut"),
     person("Abhyuday", "Mandal", role="aut"))
-Description: Contains different algorithms and construction methods for optimal Latin hypercube designs (LHDs) with flexible sizes. Our package is comprehensive since it is capable of generating maximin distance LHDs, maximum projection LHDs, and orthogonal and nearly orthogonal LHDs. Detailed comparisons and summary of all the algorithms and construction methods in this package can be found at Hongzhi Wang, Qian Xiao and Abhyuday Mandal (2021) <arXiv:2010.09154>. This package is particularly useful in the area of Design and Analysis of Experiments (DAE). More specifically, design of computer experiments.
+Description: Contains different algorithms and construction methods for optimal Latin hypercube designs (LHDs) with flexible sizes. Our package is comprehensive since it is capable of generating maximin distance LHDs, maximum projection LHDs, and orthogonal and nearly orthogonal LHDs. Detailed comparisons and summary of all the algorithms and construction methods in this package can be found at Hongzhi Wang, Qian Xiao and Abhyuday Mandal (2021) <doi:10.48550/arXiv.2010.09154>. This package is particularly useful in the area of Design and Analysis of Experiments (DAE). More specifically, design of computer experiments.
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.2
 Suggests: testthat, knitr, rmarkdown, devtools
 Imports: stats, numbers, utils
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2021-07-31 17:56:56 UTC; wangh
+Packaged: 2024-09-10 23:14:13 UTC; HW
 Author: Hongzhi Wang [aut, cre],
   Qian Xiao [aut],
   Abhyuday Mandal [aut]
-Maintainer: Hongzhi Wang <hw34508@uga.edu>
+Maintainer: Hongzhi Wang <wanghongzhi.ut@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-07-31 18:20:02 UTC
+Date/Publication: 2024-09-10 23:40:02 UTC

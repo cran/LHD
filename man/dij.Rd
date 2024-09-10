@@ -9,9 +9,9 @@ dij(X, i, j, q = 1)
 \arguments{
 \item{X}{A matrix object. In general, \code{X} stands for the design matrix.}
 
-\item{i}{A positive integer, which stands for the i^{th} row of \code{X}.}
+\item{i}{A positive integer, which stands for the ith row of \code{X}.}
 
-\item{j}{A positive integer, which stands for the j^{th} row of \code{X}. Both \code{i} and \code{j} should be in [1,nrow(X)] and they should not be equal to each other.}
+\item{j}{A positive integer, which stands for the jth row of \code{X}. Both \code{i} and \code{j} should be in [1,nrow(X)] and they should not be equal to each other.}
 
 \item{q}{The default is set to be 1, and it could be either 1 or 2. If \code{q} is 1, \code{dij} is the Manhattan (rectangular) distance. If \code{q} is 2, \code{dij} is the Euclidean distance.}
 }
