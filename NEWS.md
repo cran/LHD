@@ -1,3 +1,7 @@
+# LHD 1.4.1
+
+* Updated .Rbuildignore to make sure LICENSE.md is included in the package tarball (.tar.gz).
+
 # LHD 1.4.0
 
 * Updated maintainer's email address.

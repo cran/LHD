@@ -1,7 +1,7 @@
 Package: LHD
 Type: Package
 Title: Latin Hypercube Designs (LHDs)
-Version: 1.4.0
+Version: 1.4.1
 Authors@R: c(
     person("Hongzhi", "Wang", email="wanghongzhi.ut@gmail.com", role=c("aut","cre")),
     person("Qian", "Xiao", role="aut"),
@@ -14,10 +14,10 @@ Suggests: testthat, knitr, rmarkdown, devtools
 Imports: stats, numbers, utils
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2024-09-10 23:14:13 UTC; HW
+Packaged: 2025-02-12 03:42:07 UTC; HW
 Author: Hongzhi Wang [aut, cre],
   Qian Xiao [aut],
   Abhyuday Mandal [aut]
 Maintainer: Hongzhi Wang <wanghongzhi.ut@gmail.com>
 Repository: CRAN
-Date/Publication: 2024-09-10 23:40:02 UTC
+Date/Publication: 2025-02-12 11:40:19 UTC
